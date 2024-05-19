@@ -1,3 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
 @import '@fortawesome/fontawesome-free/css/all.css';
 @import 'mdb-angular-ui-kit/assets/scss/mdb.scss';
+
+:root {
+    --green-primary: #52FF00;
+    --black-primary: #191919;
+    --black-secundary: #212224;
+    --grey: #292B2E;
+    --white: #ffffff;
+}
+.bg-green-primary {
+    background-color: var(--green-primary);
+}
+.bg-black-primary {
+    background-color: var(--black-primary);
+}
+.bg-black-secundary {
+    background-color: var(--black-secundary);
+}
+.bg-grey {
+    background-color: var(--grey);
+}
+.text-green-primary {
+    color: var(--green-primary);
+}
+.text-black-secundary {
+    color: var(--black-secundary);
+}
+.text-white {
+    color: var(--white);
+}
+.border-color-green {
+    border-color: var(--green-primary);
+}
