@@ -1,3 +1,53 @@
+<div class="container">
 
-<app-footer></app-footer>
+    <div class="row">
+
+        <div class="col-lg-7">
+            <app-carrinho-card></app-carrinho-card>
+        </div>
+
+        <div class="col-lg-4">
+
+            <div class="card">
+                <div class="card-body bg-black-secundary">
+                    <h3 class="card-title text-white">Resumo do Pedido</h3>
+
+                    <div class="text-white">
+                        <h5 >produtos (Numeros de pedidos)</h5>
+                    </div> 
+
+                    <div class="info_pedido">
+                        <h5 class="text-white">Subtotal:</h5>
+                        <h5 class="text-green-primary">R$ 3.048,77</h5>
+                    </div>
+
+                    <div class="info_pedido">
+                        <h5 class="text-white">Frete:</h5>
+                        <h5 class="text-green-primary">R$ 0</h5>
+                    </div>
+
+                    <div class="info_pedido">
+                        <h5 class="text-white">Total:</h5>
+                        <h5 class="text-green-primary">R$ 3,048,77</h5>
+                    </div>
+
+                    <div class="text-white">
+                        <h4> Finalizar Compra </h4>
+                        <h5> Chave Pix:</h5>
+                        <img src="/GreenLine-Front/src/assets/img/qr code example 1.jpg" alt=" QR CODE">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <app-footer></app-footer>
+    </div>
+
+</div>
+
+
+
 <router-outlet></router-outlet>
