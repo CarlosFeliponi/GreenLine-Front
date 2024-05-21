@@ -1,0 +1,32 @@
+.row{
+    justify-content: space-around;
+}
+
+.imagem{
+    display: flex;
+    margin-right: -80px;
+    width: 180px;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.card-body{
+    display: flex;
+    justify-content: space-between;
+    margin-left: -30px;
+}
+
+.preco{
+    margin-bottom: 35px;
+}
+
+.botao{
+    padding: 10px 35px;
+    margin-bottom: 5px;
+}
+
+.esquerda_card{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
