@@ -2,7 +2,7 @@
 <div class="text-white bg-black-secundary card" style="max-width: 800px;">
   <div class="row">
   
-      <img src="/GreenLine-Front/src/assets/img/IMG_Card_Carrinho_GreenLine.jpg"
+      <img src="../../../../../assets/img/IMG_Card_Carrinho_GreenLine.jpg"
         alt="Imagem Pc" class="img-fluid rounded-start imagem"/>
   
 
@@ -19,8 +19,7 @@
 
         <div class="direita_card">
           <h4 class="text-green-primary preco">R$ 3.048,77</h4>
-          <button type="button" class="border-color-green text-white btn btn-outline- botao" mdbRipple
-            rippleColor="">Remover</button>
+          <button type="button" class="border-color-green text-white btn btn-outline- botao" mdbRipple (click)="deleteById(produto.id)">Remover</button>
         </div>
       </div>
 

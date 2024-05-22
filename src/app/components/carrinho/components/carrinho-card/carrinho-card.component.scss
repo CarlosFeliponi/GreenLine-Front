@@ -3,11 +3,10 @@
 }
 
 .imagem{
-    display: flex;
-    margin-right: -80px;
-    width: 180px;
-    padding: 10px;
-    border-radius: 4px;
+    margin-right: -50px;
+    width: 150px;
+    padding: 20px;
+    border-radius: 30px;
 }
 
 .card-body{
@@ -17,7 +16,7 @@
 }
 
 .preco{
-    margin-bottom: 35px;
+    margin-bottom: 30px;
 }
 
 .botao{
@@ -29,4 +28,5 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    margin-top: -10px;
 }
