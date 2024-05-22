@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Carrinho } from '../../../../models/carrinho';
 
 @Component({
   selector: 'app-carrinho-card',
@@ -9,6 +10,13 @@ import { Component } from '@angular/core';
 })
 export class CarrinhoCardComponent {
 
-  deleteById
+  lista: Carrinho[] = [];
 
+  constructor(){
+
+    let carrinho: Carrinho = new Carrinho();
+    carrinho.id = 1;
+    carrinho.produto = "PC gamer "
+
+  }
 }
