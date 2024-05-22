@@ -42,5 +42,8 @@
     color: var(--white);
 }
 .border-color-green {
-    border-color: var(--green-primary);
+    border-color: var(--green-primary)!important;
+}
+.border-color-grey {
+    border-color: var(--grey)!important;
 }
