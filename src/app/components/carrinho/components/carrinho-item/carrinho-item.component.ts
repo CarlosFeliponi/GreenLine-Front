@@ -6,13 +6,13 @@ import { RouterLink } from '@angular/router';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-carrinho-card',
+  selector: 'app-carrinho-item',
   standalone: true,
   imports: [RouterLink, CommonModule],
-  templateUrl: './carrinho-card.component.html',
-  styleUrls: ['./carrinho-card.component.scss']
+  templateUrl: './carrinho-item.component.html',
+  styleUrls: ['./carrinho-item.component.scss']
 })
-export class CarrinhoCardComponent {
+export class CarrinhoItemComponent {
 
   lista: Carrinho[] = [];
 
