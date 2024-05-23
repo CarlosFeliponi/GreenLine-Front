@@ -10,7 +10,7 @@
     <div class=" col-md-8">
       <div class="card-body">
         <div class="esquerda_card">
-          <h5 class="card-title">{{carrinho.produto}}</h5>
+          <h5 class="card-title">Produto</h5>
 
           <div class="form-outline text_card_esquerda">
             <input type="number" id="typeNumber" class="form-control" style="max-width: 300px; color: white;" />
@@ -20,7 +20,7 @@
 
         <div class="direita_card">
           <h4 class="text-green-primary preco">{{carrinho.valor_unitario}}</h4>
-          <button type="button" class="border-color-green text-white btn btn-outline- botao" mdbRipple (click)="deleteById(carrinho)">Remover</button>
+          <button type="button" class="border-color-green text-white btn btn-outline- botao" mdbRipple (click)="delete(carrinho)">Remover</button>
         </div>
       </div>
 

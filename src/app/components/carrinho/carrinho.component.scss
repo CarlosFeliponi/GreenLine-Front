@@ -16,7 +16,7 @@
 .produto{
     margin-top: 25px;
     margin-bottom: -10px;
-}
+}   
 
 .info_pedido{
     display: flex;
@@ -24,10 +24,8 @@
     padding: 10px;
 }
 
-
 .imagem{
-    width: 140px;
-    margin-left: 120px;
+    max-width: 140px;
 }
 
 .footer{

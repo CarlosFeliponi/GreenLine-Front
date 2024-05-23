@@ -37,7 +37,7 @@ export class CarrinhoCardComponent {
     });
   }
 
-  deleteById(carrinho: Carrinho) {
+  delete(carrinho: Carrinho) {
     Swal.fire({
       title: 'Tem certeza que deseja deletar este registro?',
       icon: 'warning',
