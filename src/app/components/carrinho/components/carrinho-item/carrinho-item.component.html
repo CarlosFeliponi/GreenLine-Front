@@ -8,10 +8,10 @@
         alt="Imagem Pc" class="img-fluid rounded-start imagem"/>
   
 
-    <div class=" col-md-4">
+    <div class=" col-md-10">
       <div class="card-body">
         <div class="esquerda_card">
-          <h5 class="card-title">Produto</h5>
+          <h5 class="card-title fw-bolder">Produto</h5>
 
           <div class="form-outline text_card_esquerda">
             <div class="container1">
@@ -19,13 +19,13 @@
               <span>{{ value }}</span>
               <button class="botaoID" (click)="increment()">+</button>
             </div>
-            <label class="text-white form-label" for="typeNumber">Quantidade: {{carrinho.quantProd}} </label>
+            <label class="text-white form-label fw-bolder" for="typeNumber">Quantidade: {{carrinho.quantProd}} </label>
           </div>
         </div>
 
         <div class="direita_card">
-          <h4 class="text-green-primary">R${{carrinho.valorUnitario}}</h4>
-          <button type="button" class="border-color-green text-white btn btn-outline- botao" mdbRipple (click)="delete(carrinho)">Remover</button>
+          <h4 class="text-green-primary fw-bolder ">R${{carrinho.valorUnitario}}</h4>
+          <button type="button fw-bolder" class="border-color-green text-white btn btn-outline- botao" mdbRipple (click)="delete(carrinho)">Remover</button>
         </div>
       </div>
 
