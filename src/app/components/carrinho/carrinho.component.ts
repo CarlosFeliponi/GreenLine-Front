@@ -1,13 +1,12 @@
 import { Component, inject } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { FooterComponent } from '../layout/footer/footer.component';
 import { CarrinhoItemComponent } from './components/carrinho-item/carrinho-item.component';
-import { NavbarComponent } from '../layout/navbar/navbar.component';
+import { CarrinhoCardComponent } from './components/carrinho-card/carrinho-card.component';
+
 
 @Component({
   selector: 'app-carrinho',
   standalone: true,
-  imports: [NavbarComponent ,FooterComponent, RouterOutlet, CarrinhoItemComponent],
+  imports: [CarrinhoItemComponent, CarrinhoCardComponent],
   templateUrl: './carrinho.component.html',
   styleUrl: './carrinho.component.scss'
 })
