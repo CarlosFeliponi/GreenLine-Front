@@ -22,12 +22,4 @@ export class CarrinhoService {
     return this.http.delete<string>(this.API+"/delete/"+id, {responseType: 'text' as 'json'});
   }
 
-  incrementQuantity(idItem: number): Observable<Carrinho> {
-    return this.http.post<Carrinho>({this.API}/${idItem}/increment`, {});
-  }
-
-  decrementQuantity(idItem: number): Observable<Carrinho> {
-    return this.http.post<Carrinho>({this.apiUrl}{idItem}/decrement`, {});
-  }
-
 }
