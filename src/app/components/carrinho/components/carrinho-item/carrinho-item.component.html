@@ -3,6 +3,7 @@
   <div class="row">
     
     @for (carrinho of lista; track $index) {
+
       <img src="../../../../../assets/img/IMG_Card_Carrinho_GreenLine.jpg"
         alt="Imagem Pc" class="img-fluid rounded-start imagem"/>
   
@@ -14,12 +15,12 @@
 
           <div class="form-outline text_card_esquerda">
             <input type="number" id="typeNumber" class="form-control" style="max-width: 300px; color: white;" />
-            <label class="text-white form-label" for="typeNumber">Quantidade: {{carrinho.quantProd}}</label>
+            <label class="text-white form-label" for="typeNumber">Quantidade: {{carrinho.quantProd}} </label>
           </div>
         </div>
 
         <div class="direita_card">
-          <h4 class="text-green-primary preco">{{carrinho.valor_unitario}}</h4>
+          <h4 class="text-green-primary preco">R${{carrinho.valor_unitario}}</h4>
           <button type="button" class="border-color-green text-white btn btn-outline- botao" mdbRipple (click)="delete(carrinho)">Remover</button>
         </div>
       </div>

@@ -18,6 +18,7 @@ export class CarrinhoItemComponent {
 
   carrinhoService = inject(CarrinhoService);
 
+
   constructor() {
     this.listAll();
   }
