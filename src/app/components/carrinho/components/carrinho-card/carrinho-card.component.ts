@@ -54,7 +54,6 @@ export class CarrinhoCardComponent {
               icon: 'success',
               confirmButtonText: 'Ok',
             });
-            
             this.listAll();
           },
           error: erro => {

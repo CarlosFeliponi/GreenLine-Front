@@ -18,8 +18,8 @@ export class CarrinhoService {
     return this.http.get<Carrinho[]>(this.API+"/listAll");
   }
 
-  delete(id: number): Observable<string>{
-    return this.http.delete<string>(this.API+"/delete"+id, {responseType: 'text' as 'json'});
+  delete(idItem: number): Observable<string>{
+    return this.http.delete<string>(this.API+"/delete/"+idItem, {responseType: 'text' as 'json'});
   }
 
 }
