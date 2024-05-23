@@ -1,7 +1,7 @@
 export class Carrinho {
 
     idItem!: number;
-    Valor_unitario!: number;
+    valor_unitario!: number;
     quantProd!: number;
     produto!: string;
 

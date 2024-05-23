@@ -12,12 +12,14 @@ export class CarrinhoService {
 
   API = "http://localhost:8080/api/itemcarrinho";
 
-  constructor() {  }
+  constructor() { }
 
   listAll(): Observable<Carrinho[]>{
-    
     return this.http.get<Carrinho[]>(this.API+"/listAll");
+  }
 
+  delete(id: number): Observable<string>{
+    return this.http.delete<string>(this.API+"/delete"+id, {responseType: 'text' as 'json'});
   }
 
 }

@@ -1,8 +1,16 @@
 
 .row{
    display: flex;
-   margin-top: 10vh;
+   margin-top: 20vh;
    justify-content: space-around;
+}
+
+.header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
 }
 
 .produto{
@@ -18,8 +26,8 @@
 
 
 .imagem{
-    width: 170px;
-    margin-left: 100px;
+    width: 140px;
+    margin-left: 120px;
 }
 
 .footer{
