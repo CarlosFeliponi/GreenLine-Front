@@ -14,9 +14,4 @@ import Swal from 'sweetalert2';
 })
 export class CarrinhoCardComponent {
 
-  lista: Carrinho[] = [];
-
-
-  carrinhoService = inject(CarrinhoService);
-
-}
+  }

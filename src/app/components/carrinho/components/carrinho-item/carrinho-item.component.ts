@@ -18,6 +18,18 @@ export class CarrinhoItemComponent {
 
   carrinhoService = inject(CarrinhoService);
 
+  value: number = 0;
+
+
+  increment() {
+    this.value++;
+  }
+
+  decrement() {
+    if (this.value > 0){
+    this.value--;
+    }
+  }
 
   constructor() {
     this.listAll();
