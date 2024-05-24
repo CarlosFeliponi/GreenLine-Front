@@ -21,13 +21,13 @@ export class CarrinhoItemComponent {
   value: number = 0;
 
 
-  increment() {
-    this.value++;
+  increment(carrinho: Carrinho) {
+    carrinho.quantProd++;
   }
 
-  decrement() {
-    if (this.value > 0){
-    this.value--;
+  decrement( carrinho: Carrinho) {
+    if (carrinho.quantProd > 0){
+    carrinho.quantProd--;
     }
   }
 

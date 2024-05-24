@@ -15,9 +15,9 @@
 
           <div class="form-outline text_card_esquerda">
             <div class="container1">
-              <button class="botaoID" (click)="decrement()">-</button>
-              <span>{{ value }}</span>
-              <button class="botaoID" (click)="increment()">+</button>
+              <button class="botaoID" name ="bcd {{carrinho.idItem}}" (click)="decrement(carrinho)">-</button>
+              <span>{{ carrinho.quantProd }}</span>
+              <button class="botaoID" name ="abc {{carrinho.idItem}}" (click)="increment(carrinho)">+</button>
             </div>
             <label class="text-white form-label fw-bolder" for="typeNumber">Quantidade: {{carrinho.quantProd}} </label>
           </div>
