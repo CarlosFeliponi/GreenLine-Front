@@ -1,4 +1,4 @@
-
+<!-- 
 <div class="text-white bg-black-secundary card" style="max-width: 800px;">
   <div class="row">
     
@@ -34,4 +34,72 @@
 
   </div>
   
-</div>
+</div> -->
+
+<!-- \\\\\\\\\\\\\\\\\\\\ -->
+
+<div class="card-body bg-grey">
+  <hr class="pt-3"/>
+  
+  @for (carrinho of lista; track $index) {
+    <!-- Single item -->
+    <div class="row">
+              <div class="col-lg-2 col-md-12 mb-4 mb-lg-0">
+                <!-- Image -->
+                <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
+                  <img src="../../../../../assets/img/IMG_Card_Carrinho_GreenLine.jpg"
+                    class="w-100" alt="Blue Jeans Jacket" />
+                  <a href="#!">
+                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
+                  </a>
+                </div>
+                <!-- Image -->
+              </div>
+
+              <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
+                <!-- Data -->
+                <h5 class="fw-bolder text-white"><strong> GTX 1050TI 4GB</strong></h5>
+
+                <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-sm me-1 mb-2 bg-green-primary"  data-mdb-tooltip-init  
+                  title="Remove item" (click)="delete(carrinho)">
+                  <i class="fas fa-trash text-black-secundary "></i>
+                </button>
+                <!-- Data -->
+              </div>
+
+              <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                  <!-- Price -->
+                  <h5 class="text-start text-md-center fw-bolder text-green-primary">
+                    <strong>R${{carrinho.valorUnitario}}</strong>
+                  </h5>
+                  <!-- Price -->
+                <!-- Quantity -->
+                <div class="d-flex mb-4" style="max-width: 300px">
+                  <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary px-3 me-2 bg-green-primary"
+                  name ="b{{carrinho.idItem}}" (click)="decrement(carrinho)">
+                    <i class="fas fa-minus text-black-secundary"></i>
+                  </button>
+
+                  <div data-mdb-input-init class="form-outline">
+                    <input id="form1" min="0" name="quantity" value="{{ carrinho.quantProd }}" type="number" class="form-control border text-white" />
+                    <label class="form-label" for="form1"></label>
+                  </div>
+
+                  <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary px-3 ms-2 bg-green-primary"
+                   name ="a{{carrinho.idItem}}" (click)="increment(carrinho)">
+                    <i class="fas fa-plus text-black-secundary"></i>
+                  </button>
+                </div>
+                <!-- Quantity -->
+              </div>
+              
+            </div>
+            <!-- Single item -->
+            
+            <hr class="my-4" />
+          }
+          </div>
+          
+
+
+          
