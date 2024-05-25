@@ -1,4 +1,12 @@
-<div class="produto_container">
+<!-- <div class="produto_container">
     <app-produtos-card></app-produtos-card>
-</div>
+</div> -->
+<app-navbar></app-navbar>
+<div class="d-flex flex-row flex-wrap justify-content-start produto_container">
+    @for (produto of lista; track $index){
 
+        <app-produtos-card [produto]="produto"></app-produtos-card>
+    
+    }
+</div>
+<app-footer></app-footer>
