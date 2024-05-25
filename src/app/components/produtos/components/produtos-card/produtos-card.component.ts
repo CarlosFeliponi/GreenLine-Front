@@ -1,4 +1,4 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { Produto } from '../../../../models/produto';
 import { ProdutosService } from '../../../../services/produtos.service';
 import Swal from 'sweetalert2';
@@ -15,6 +15,12 @@ export class ProdutosCardComponent {
 
   //serve para receber um objeto produto do componente pai
   @Input("produto") produto!: Produto;
+
+  @Output("retorno") retornoProduto = new EventEmitter<any>();
+
+  btnClicked(){
+    this.retornoProduto.emit(this.produto);
+  }
   // lista: Produto[] = [];
 
   // produtosService = inject(ProdutosService);
