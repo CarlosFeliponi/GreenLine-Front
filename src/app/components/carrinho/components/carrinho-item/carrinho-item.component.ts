@@ -50,6 +50,27 @@ export class CarrinhoItemComponent {
     });
   }
 
+  // updateQuantity(carrinho: Carrinho, increment: boolean) {
+  //   const newQuantity = increment ? carrinho.quantProd + 1 : carrinho.quantProd - 1;
+  //   if (newQuantity < 0) {
+  //     return; // Evita quantidade negativa
+  //   }
+  //   this.carrinhoService.updateQuantity(carrinho.idItem, newQuantity).subscribe({
+  //     next: updatedCarrinho => {
+  //       carrinho.quantProd = updatedCarrinho.quantProd;
+  //     },
+  //     error: erro => {
+  //       Swal.fire({
+  //         title: 'Ocorreu um erro ao atualizar a quantidade',
+  //         icon: 'error',
+  //         confirmButtonText: 'Ok',
+  //       });
+  //     }
+  //   });
+  // }
+
+
+
   delete(carrinho: Carrinho) {
     Swal.fire({
       title: 'Tem certeza que deseja deletar este registro?',

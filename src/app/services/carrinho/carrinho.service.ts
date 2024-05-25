@@ -22,4 +22,8 @@ export class CarrinhoService {
     return this.http.delete<string>(this.API+"/delete/"+id, {responseType: 'text' as 'json'});
   }
 
+  // updateQuantity(id: number, quantProd: number): Observable<Carrinho> {
+  //   return this.http.put<Carrinho>(${this.API}/update/${id}, { quantProd });
+  // }
+
 }
