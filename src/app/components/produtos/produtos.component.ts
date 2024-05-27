@@ -18,9 +18,11 @@ import { Vendas } from '../../models/vendas';
 })
 export class ProdutosComponent {
   lista: Produto[] = [];
+  listacarrinho: ItemCarrinho[] = [];
+
   produtoe: Produto = new Produto ("", 1, "");
-  carrinho: Vendas = new Vendas (0, "", 0);
-  itemCarrinho: ItemCarrinho = new ItemCarrinho (0, 1, this.produtoe, this.carrinho);
+   //carrinho: Vendas = new Vendas (3, "", 0);
+  itemCarrinho: ItemCarrinho = new ItemCarrinho ( 1, this.produtoe);
 
   produtosService = inject(ProdutosService);
   itemCarrinhoService = inject(ItemCarrinhoService);
@@ -28,6 +30,21 @@ export class ProdutosComponent {
   produto: any;//serve para mandar o objeto produto para o componente filho(produto-card)
 
   listAll(){
+
+    this.itemCarrinhoService.listAll().subscribe({
+      next: lista => {
+        this.listacarrinho = lista;
+      },
+      error: erro =>{
+        Swal.fire({
+          title: "ERRO",
+          text: "Ocorreu um erro inesperado",
+          icon: "error",
+          confirmButtonText: 'OK',
+        });
+      }
+      
+    });
 
     this.produtosService.listAll().subscribe({
       next: lista => {
@@ -47,12 +64,57 @@ export class ProdutosComponent {
   }
 
   save(produto: Produto){
-  
-      if (produto){
-        console.log('produto recebid: ', produto);
 
-        this.itemCarrinho = new ItemCarrinho(produto.valorProduto, 1, produto, this.carrinho);
-        console.log('item carrinho criado: ',this.itemCarrinho);
+      if (!produto || !produto.idProduto) {
+        console.error('Produto ou idProduto é nulo:', produto);
+        Swal.fire({
+          title: 'Erro',
+          text: 'Produto inválido',
+          icon: 'error',
+          confirmButtonText: 'Ok',
+        });
+        return;
+      }
+
+      let itemEncontrado = false;
+
+      //loop para verificar se o item ja existe no item_carrinho, caso exista icrementa 1 na quantidade produto
+      for (let i=0; i < this.listacarrinho.length; i++ ){
+
+        if (this.listacarrinho[i].produto.idProduto === produto.idProduto ){
+
+          let id = this.listacarrinho[i].idItem;
+          this.itemCarrinho = this.listacarrinho[i];
+          this.itemCarrinho.quantProd += 1;
+
+          this.itemCarrinhoService.update(this.itemCarrinho, id).subscribe({
+            next: mensagem => {
+              Swal.fire({
+                title: mensagem,
+                icon: 'success',
+                confirmButtonText: 'Ok',
+              });
+              this.listAll();
+            },
+            error: erro => {
+              Swal.fire({
+                title: 'Erro ao atualizar item',
+                text: erro.error?.message || 'Erro desconhecido',
+                icon: 'error',
+                confirmButtonText: 'Ok',
+              });
+              console.log(erro);
+            }
+          });
+
+          itemEncontrado = true;
+          break;
+        }
+        
+      }
+
+      if (!itemEncontrado){
+        this.itemCarrinho = new ItemCarrinho( 1, produto);
 
         this.itemCarrinhoService.save(this.itemCarrinho).subscribe({
           next: mensagem => {
@@ -61,23 +123,25 @@ export class ProdutosComponent {
               icon: 'success',
               confirmButtonText: 'Ok',
             });
-            //this.retorno.emit(this.itemCarrinho);
+            this.listAll();
           },
           error: erro => {
             Swal.fire({
-              title: 'Ocorreu um erro',
+              title: erro,
               icon: 'error',
               confirmButtonText: 'Ok',
             });
+            console.log(erro);
           }
         });
-      }
 
-    }
+      }
+      console.log(itemEncontrado);
+  }
 
   btnClicked(produto: Produto){
     this.save(produto);
-    console.log('item carrinho apos save: ', this.itemCarrinho);
+
   }
 
 
