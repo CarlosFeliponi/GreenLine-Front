@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { Produto } from '../../../../models/produto';
 import { ProdutosService } from '../../../../services/produtos.service';
 import Swal from 'sweetalert2';
@@ -12,31 +12,40 @@ import Swal from 'sweetalert2';
 })
 
 export class ProdutosCardComponent {
-  lista: Produto[] = [];
 
-  produtosService = inject(ProdutosService);
+  //serve para receber um objeto produto do componente pai
+  @Input("produto") produto!: Produto;
 
-  listAll(){
+  @Output("retorno") retornoProduto = new EventEmitter<any>();
 
-    this.produtosService.listAll().subscribe({
-      next: lista => {
-        this.lista = lista;
-      },
-      error: erro =>{
-        Swal.fire({
-          title: "ERRO",
-          text: "Ocorreu um erro inesperado",
-          icon: "error",
-          confirmButtonText: 'OK',
-        });
-      }
+  btnClicked(){
+    this.retornoProduto.emit(this.produto);
+  }
+  // lista: Produto[] = [];
+
+  // produtosService = inject(ProdutosService);
+
+  // listAll(){
+
+  //   this.produtosService.listAll().subscribe({
+  //     next: lista => {
+  //       this.lista = lista;
+  //     },
+  //     error: erro =>{
+  //       Swal.fire({
+  //         title: "ERRO",
+  //         text: "Ocorreu um erro inesperado",
+  //         icon: "error",
+  //         confirmButtonText: 'OK',
+  //       });
+  //     }
       
-    });
+  //   });
     
-  }
+  // }
 
-  constructor(){
-    this.listAll();
+  // constructor(){
+  //   this.listAll();
     
-  }
+  // }
 }
