@@ -1,6 +1,4 @@
-
-
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../../services/login.service';
 import { Login } from '../../models/login';
@@ -17,17 +15,23 @@ import Swal from 'sweetalert2';
 export class LoginComponent {
   loginData: Login = new Login('','') // Certifique-se de que o modelo Usuario está importado corretamente
   erroLogin: boolean = false;
+  
 
-  constructor(private loginService: LoginService, private router: Router) {}
+  constructor(private loginService: LoginService, public router: Router) {}
 
   logar() {
     this.loginService.login(this.loginData).subscribe(
-      response => {
+      usuarioLogado => {
+        console.log(usuarioLogado);
         Swal.fire({
           title: 'Bem vindo',
           icon: 'success',
           confirmButtonText: 'Ok',
-        });      },
+        });      
+      this.loginService.usuarioLogado = usuarioLogado;
+      //obs: verificar
+      this.router.navigate(['']);
+      },
       error => {
         Swal.fire({
           title: 'Ocorreu um erro, login inexistente',
@@ -39,4 +43,3 @@ export class LoginComponent {
     
   }
 }
-
