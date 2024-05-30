@@ -8,6 +8,8 @@ import { Login } from '../models/login';
 })
 export class LoginService {
 
+  public usuarioLogado!: Login;
+
   private API = 'http://localhost:8080/api/usuario/login'; // URL do endpoint de login no backend
 
   constructor(private http: HttpClient) { }
