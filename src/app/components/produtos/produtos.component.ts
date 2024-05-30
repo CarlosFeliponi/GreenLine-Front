@@ -7,50 +7,54 @@ import { FooterComponent } from "../layout/footer/footer.component";
 import { NavbarComponent } from "../layout/navbar/navbar.component";
 import { ItemCarrinhoService } from '../../services/item-carrinho.service';
 import { ItemCarrinho } from '../../models/item-carrinho';
-import { Vendas } from '../../models/vendas';
+import { Carrinho } from '../../models/carrinho';
+import { LoginService } from '../../services/login.service';
 
 @Component({
-    selector: 'app-produtos',
-    standalone: true,
-    templateUrl: './produtos.component.html',
-    styleUrl: './produtos.component.scss',
-    imports: [ProdutosCardComponent, FooterComponent, NavbarComponent]
+  selector: 'app-produtos',
+  standalone: true,
+  templateUrl: './produtos.component.html',
+  styleUrl: './produtos.component.scss',
+  imports: [ProdutosCardComponent, FooterComponent, NavbarComponent]
 })
 export class ProdutosComponent {
   lista: Produto[] = [];
-  listacarrinho: ItemCarrinho[] = [];
+  //carrinhoUser serve para puxar o carrinho do usuario logado passando pelos filtros do back que filtram o id usuario e o status
+  carrinhoUser!: Carrinho;
 
-  produtoe: Produto = new Produto ("", 1, "");
-   //carrinho: Vendas = new Vendas (3, "", 0);
-  itemCarrinho: ItemCarrinho = new ItemCarrinho ( 1, this.produtoe);
+  produtoe: Produto = new Produto("", 1, "");
+  itemCarrinho: ItemCarrinho = new ItemCarrinho(1, this.produtoe);
 
   produtosService = inject(ProdutosService);
   itemCarrinhoService = inject(ItemCarrinhoService);
+  loginService = inject(LoginService);//injetando a service de login para verificar o usuario logado
 
   produto: any;//serve para mandar o objeto produto para o componente filho(produto-card)
 
-  listAll(){
+  listAll() {
 
-    this.itemCarrinhoService.listAll().subscribe({
-      next: lista => {
-        this.listacarrinho = lista;
-      },
-      error: erro =>{
-        Swal.fire({
-          title: "ERRO",
-          text: "Ocorreu um erro inesperado",
-          icon: "error",
-          confirmButtonText: 'OK',
-        });
-      }
-      
-    });
+    if (this.loginService.usuarioLogado != null)
+      this.itemCarrinhoService.getCarrinhoByUser(this.loginService.usuarioLogado.idUsuario).subscribe({
+        next: carrinho => {
+          console.log(carrinho);
+          this.carrinhoUser = carrinho;
+        },
+        error: erro => {
+          Swal.fire({
+            title: "ERRO",
+            text: "Ocorreu um erro inesperado",
+            icon: "error",
+            confirmButtonText: 'OK',
+          });
+        }
+
+      });
 
     this.produtosService.listAll().subscribe({
       next: lista => {
         this.lista = lista;
       },
-      error: erro =>{
+      error: erro => {
         Swal.fire({
           title: "ERRO",
           text: "Ocorreu um erro inesperado",
@@ -58,65 +62,41 @@ export class ProdutosComponent {
           confirmButtonText: 'OK',
         });
       }
-      
+
     });
-    
+
   }
 
-  save(produto: Produto){
+  save(produto: Produto) {
 
-      if (!produto || !produto.idProduto) {
-        console.error('Produto ou idProduto é nulo:', produto);
-        Swal.fire({
-          title: 'Erro',
-          text: 'Produto inválido',
-          icon: 'error',
-          confirmButtonText: 'Ok',
-        });
-        return;
-      }
+    if (!produto || !produto.idProduto) {
+      console.error('Produto ou idProduto é nulo:', produto);
+      Swal.fire({
+        title: 'Erro',
+        text: 'Produto inválido',
+        icon: 'error',
+        confirmButtonText: 'Ok',
+      });
+      return;
+    }
 
-      let itemEncontrado = false;
+    let itemEncontrado = false;
 
-      //loop para verificar se o item ja existe no item_carrinho, caso exista icrementa 1 na quantidade produto
-      for (let i=0; i < this.listacarrinho.length; i++ ){
+    //loop para verificar se o item ja existe no item_carrinho, caso exista icrementa 1 na quantidade produto
+    if(this.carrinhoUser.itemCarrinho != null)
+    for (let i = 0; i < this.carrinhoUser.itemCarrinho.length; i++) {
 
-        if (this.listacarrinho[i].produto.idProduto === produto.idProduto ){
+      if (this.carrinhoUser.itemCarrinho[i].produto.idProduto === produto.idProduto) {
 
-          let id = this.listacarrinho[i].idItem;
-          this.itemCarrinho = this.listacarrinho[i];
-          this.itemCarrinho.quantProd += 1;
+        let id = this.carrinhoUser.itemCarrinho[i].idItem;
+        this.itemCarrinho = this.carrinhoUser.itemCarrinho[i];
+        this.itemCarrinho.quantProd += 1;
 
-          this.itemCarrinhoService.update(this.itemCarrinho, id).subscribe({
-            next: mensagem => {
-              Swal.fire({
-                title: mensagem,
-                icon: 'success',
-                confirmButtonText: 'Ok',
-              });
-              this.listAll();
-            },
-            error: erro => {
-              Swal.fire({
-                title: 'Erro ao atualizar item',
-                text: erro.error?.message || 'Erro desconhecido',
-                icon: 'error',
-                confirmButtonText: 'Ok',
-              });
-              console.log(erro);
-            }
-          });
+      let carrinhoTemp = new Carrinho();
+      carrinhoTemp.idCarrinho = this.carrinhoUser.idCarrinho;
+      this.itemCarrinho.carrinho = carrinhoTemp;
 
-          itemEncontrado = true;
-          break;
-        }
-        
-      }
-
-      if (!itemEncontrado){
-        this.itemCarrinho = new ItemCarrinho( 1, produto);
-
-        this.itemCarrinhoService.save(this.itemCarrinho).subscribe({
+        this.itemCarrinhoService.update(this.itemCarrinho, id).subscribe({
           next: mensagem => {
             Swal.fire({
               title: mensagem,
@@ -127,7 +107,8 @@ export class ProdutosComponent {
           },
           error: erro => {
             Swal.fire({
-              title: erro,
+              title: 'Erro ao atualizar item',
+              text: erro.error?.message || 'Erro desconhecido',
               icon: 'error',
               confirmButtonText: 'Ok',
             });
@@ -135,21 +116,54 @@ export class ProdutosComponent {
           }
         });
 
+        itemEncontrado = true;
+        break;
       }
-      console.log(itemEncontrado);
+
+    }
+
+    if (!itemEncontrado) {
+      this.itemCarrinho = new ItemCarrinho(1, produto);
+      let carrinhoTemp = new Carrinho();
+      carrinhoTemp.idCarrinho = this.carrinhoUser.idCarrinho;
+      this.itemCarrinho.carrinho = carrinhoTemp;
+
+      console.log(this.itemCarrinho);
+
+      this.itemCarrinhoService.save(this.itemCarrinho).subscribe({
+        next: mensagem => {
+          Swal.fire({
+            title: mensagem,
+            icon: 'success',
+            confirmButtonText: 'Ok',
+          });
+          this.listAll();
+        },
+        error: erro => {
+          Swal.fire({
+            title: erro,
+            icon: 'error',
+            confirmButtonText: 'Ok',
+          });
+          console.log(erro);
+        }
+      });
+
+    }
+    console.log(itemEncontrado);
   }
 
-  btnClicked(produto: Produto){
+  btnClicked(produto: Produto) {
     this.save(produto);
 
   }
 
 
-  
 
-  constructor(){
+
+  constructor() {
     this.listAll();
-    
+
   }
 
 }
