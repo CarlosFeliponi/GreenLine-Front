@@ -1,8 +1,8 @@
 // src/app/cadastro/cadastro.component.ts
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Cadastro } from '../../models/cadastro';
-import { CadastroService } from '../../services/cadastro.service';
+import { Cadastro } from '../../../models/cadastro';
+import { CadastroService } from '../../../services/cadastro.service';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 
