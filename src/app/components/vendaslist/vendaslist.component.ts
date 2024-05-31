@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { Vendas } from '../../models/vendas';
-import { VendasService } from '../../services/vendas.service';
+import { Carrinho } from '../../models/carrinho';
+import { CarrinhoService } from '../../services/carrinho.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -11,9 +11,9 @@ import Swal from 'sweetalert2';
   styleUrl: './vendaslist.component.scss'
 })
 export class VendaslistComponent {
-  lista: Vendas[]=[];
+  lista: Carrinho[]=[];
   
-  vendasService = inject(VendasService);
+  vendasService = inject(CarrinhoService);
 
   
   listAll(){
@@ -31,7 +31,7 @@ export class VendaslistComponent {
     })
   }
 
-  delete(vendas: Vendas){
+  delete(carrinho: Carrinho){
 
     Swal.fire({
       title: "Atenção",
@@ -44,7 +44,7 @@ export class VendaslistComponent {
     }).then((result) => {
 
       if (result.isConfirmed){
-        this.vendasService.delete(vendas.idCarrinho).subscribe({
+        this.vendasService.delete(carrinho.idCarrinho).subscribe({
           next: mensagem => {
             Swal.fire({
               title: "SUCESSO",

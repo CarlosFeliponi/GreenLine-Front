@@ -1,4 +1,4 @@
-export class Vendas {
+export class Carrinho {
     idCarrinho!: number;
     descricaoCarrinho!: string;
     valorCarrinho!: number;
