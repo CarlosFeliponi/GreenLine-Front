@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Vendas } from '../models/vendas';
+import { Carrinho } from '../models/carrinho';
 
 @Injectable({
   providedIn: 'root'
 })
-export class VendasService {
+export class CarrinhoService {
 
   http = inject(HttpClient);
 
@@ -14,8 +14,8 @@ export class VendasService {
   
   constructor() { }
 
-  listAll(): Observable<Vendas[]>{
-    return this.http.get<Vendas[]>(this.API + "/listAll");
+  listAll(): Observable<Carrinho[]>{
+    return this.http.get<Carrinho[]>(this.API + "/listAll");
   }
 
   delete(id: number): Observable<string>{
