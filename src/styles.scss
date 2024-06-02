@@ -11,6 +11,10 @@
     --white: #ffffff;
 }
 
+body {
+    background-color: var(--black-secundary);
+}
+
 *{
     font-family: "Poppins", sans-serif;
     font-style: normal;

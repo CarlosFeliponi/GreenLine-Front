@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { MdbCollapseModule } from 'mdb-angular-ui-kit/collapse';
 import { MdbDropdownModule } from 'mdb-angular-ui-kit/dropdown';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [MdbCollapseModule, MdbDropdownModule],
+  imports: [MdbCollapseModule, MdbDropdownModule, RouterLink],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
@@ -14,13 +15,13 @@ export class NavbarComponent {
     {
       text: "GREEN PRODUTOS",
       icon: 'fa-biohazard',
-      url: '#',
+      url: 'produto',
       isExternal: false
     },
     {
       text: "SERVIÇOS",
       icon: 'fa-tools',
-      url: '#',
+      url: 'produto',
       isExternal: false
     }
   ]

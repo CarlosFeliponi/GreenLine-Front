@@ -1,6 +1,6 @@
 <nav class="navbar navbar-dark bg-black-primary p-0 pt-1">
     <div class="container-fluid justify-content-around pt-1 pb-1">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" routerLink='home'>
             <img src="../../../../assets/img/Greenline-logo-sm.png" height="55" alt="Greenline logo" loading="lazy" />
         </a>
         <form class="d-flex input-group justify-content-center position-relative max-width">
@@ -11,25 +11,25 @@
         </form>
         <ul class="d-flex align-items-center p-0 m-0 list-unstyled">
             <li class="px-5">
-                <a href="#" class="text-white">
+                <a routerLink='carrinho'class="text-white">
                     <span><i class="fas fa-shopping-cart fa-xl"></i></span>
                     <span class="badge rounded-pill badge-notification text-black-secundary bg-green-primary">0</span>
                 </a>
             </li>
             <li mdbDropdown class="nav-link ">
-                <button href="#" class="text-white d-flex flex-column align-items-center nav-link border-0" id="navbarDropdownMenuLink" role="button" mdbDropdownToggle aria-expanded="false">
+                <button routerLink='usuario' class="text-white d-flex flex-column align-items-center nav-link border-0" id="navbarDropdownMenuLink" role="button" mdbDropdownToggle aria-expanded="false">
                     <span><i class="fas fa-user-alt fa-lg"></i></span>
                     <strong class="font-14">Minha Conta</strong>
                 </button>
                 <ul mdbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <li>
-                      <a class="dropdown-item" href="#">Meu perfil</a>
+                      <a class="dropdown-item" routerLink='admin'>Meu perfil</a>
                     </li>
                     <li>
                       <a class="dropdown-item" href="#">Editar perfil</a>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="#">Sair</a>
+                      <a class="dropdown-item" routerLink='login'>Sair</a>
                     </li>
                   </ul>
             </li>
@@ -42,7 +42,7 @@
             <button class="navbar-toggler d-flex align-items-center p-0" type="button" (click)="externalContent.toggle()"
                 aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="PRODUTOS">
               <span><i class="fas fa-bars text-green-primary pt-1"></i></span>
-              <a href="#">
+              <a routerLink='produto'>
                   <span class="text-white font-16 fw-medium ps-4">PRODUTOS</span>
               </a>
             </button>
@@ -50,7 +50,7 @@
           <span>|</span> <!-- maneira correcta? verificar! -->
           @for (item of actionsNav; track $index) {
           <li class="nav-item">
-            <a href="{{item.url}}" class="d-flex">
+            <a routerLink='{{ item.url }}' class="d-flex">
                 <span><i class="fas {{item.icon}} text-green-primary fa-lg"></i></span>
                 <span class="text-white ps-4 fw-medium font-16 text-nowrap">{{item.text}}</span>
             </a>
