@@ -1,10 +1,12 @@
 import { Routes } from '@angular/router';
 import { MainLayoutComponent } from './components/layout/main-layout/main-layout.component';
 import { AdminLayoutComponent } from './components/layout/admin/admin-layout/admin-layout.component';
+import { FornecedorlistComponent } from './components/fornecedor/fornecedorlist/fornecedorlist/fornecedorlist.component';
 
 export const routes: Routes = [
     {
         path: '', component: MainLayoutComponent, children: [
+            {path: "fornecedor", component: FornecedorlistComponent},
             {
                 path: '',
                 redirectTo: 'home',
@@ -71,6 +73,15 @@ export const routes: Routes = [
             path: 'categoriasdetails',
             loadComponent: () => import('./components/categorias/categoriasdetails/categoriasdetails.component').then(c => c.CategoriasdetailsComponent),
             title:'GreenLine | Editagem de Categorias'
-        }
+        },
+
+        //
+        {
+            path: 'fornecedorlist',
+            loadComponent: () => import('./components/fornecedor/fornecedorlist/fornecedorlist/fornecedorlist.component').then(c => c.FornecedorlistComponent),
+            title:'GreenLine | Listagem de Fornecedor'
+        },
+       
+        //
     ]}
 ];
