@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
 })
 export class ProdutosdetailsComponent {
 
-  @Input("produto") produto: Produto = new Produto("", 0, "");
+  @Input("produto") produto: Produto = new Produto();
   @Output("retorno") retorno = new EventEmitter<any>();
   router = inject(ActivatedRoute);
   router2 = inject(Router);
