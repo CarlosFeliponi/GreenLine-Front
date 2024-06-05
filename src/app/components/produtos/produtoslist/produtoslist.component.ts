@@ -16,11 +16,11 @@ import { MdbModalModule, MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit
 export class ProdutoslistComponent {
 
   lista: Produto[] = [];
-  produtoEdit: Produto = new Produto("", 0, "");
+  produtoEdit: Produto = new Produto();
 
   //ELEMENTOS DA MODAL
   modalService = inject(MdbModalService); // para conseguir abrir a modal
-  @ViewChild("modalCarroDetalhe") modalProdutosDetalhe!: TemplateRef<any>;
+  @ViewChild("modalProdutoDetalhe") modalProdutosDetalhe!: TemplateRef<any>;
   modalRef!: MdbModalRef<any>;
 
   produtosService = inject(ProdutosService);
@@ -81,14 +81,13 @@ export class ProdutoslistComponent {
       }
     });
     
-
   }
 
   edit(produto: Produto){
     this.produtoEdit = Object.assign({}, produto); //clonando pra evitar referência de objeto
     this.modalRef = this.modalService.open(this.modalProdutosDetalhe);
   }
-  //tudo abaixo deve ser observado
+  
   constructor(){
     this.listAll();
 
@@ -96,7 +95,6 @@ export class ProdutoslistComponent {
     let produtoEditado = history.state.produtoEditado;
 
     if (produtoNovo != null) {
-      produtoNovo.id = 9999;
       this.lista.push(produtoNovo);
     }
 
@@ -109,7 +107,7 @@ export class ProdutoslistComponent {
   }
   
   new(){
-    this.produtoEdit = new Produto("",0, "");
+    this.produtoEdit = new Produto();
     this.modalRef = this.modalService.open(this.modalProdutosDetalhe);
   }
 

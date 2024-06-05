@@ -8,10 +8,5 @@ export class ItemCarrinho {
     quantProd!: number;
     produto!: Produto;
     carrinho!: Carrinho;
-
-    constructor(valorUnitario: number, quantProd: number){
-        this.valorUnitario = valorUnitario;
-        this.quantProd = quantProd;
-    }
-
+    
 }

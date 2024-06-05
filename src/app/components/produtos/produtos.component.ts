@@ -18,25 +18,23 @@ import { LoginService } from '../../services/login.service';
   imports: [ProdutosCardComponent, FooterComponent, NavbarComponent]
 })
 export class ProdutosComponent {
-  lista: Produto[] = [];
-  //carrinhoUser serve para puxar o carrinho do usuario logado passando pelos filtros do back que filtram o id usuario e o status
-  carrinhoUser!: Carrinho;
 
-  produtoe: Produto = new Produto("", 1, "");
-  itemCarrinho: ItemCarrinho = new ItemCarrinho(1, this.produtoe);
+  lista: Produto[] = [];
+  carrinhoUser!: Carrinho;//carrinhoUser serve para puxar o carrinho do usuario logado passando pelos filtros do back que filtram o id usuario e o status
+  itemCarrinho: ItemCarrinho = new ItemCarrinho();
+
+  produto: any;//serve para mandar o objeto produto para o componente filho(produto-card)
 
   produtosService = inject(ProdutosService);
   itemCarrinhoService = inject(ItemCarrinhoService);
   loginService = inject(LoginService);//injetando a service de login para verificar o usuario logado
 
-  produto: any;//serve para mandar o objeto produto para o componente filho(produto-card)
-
   listAll() {
 
+    //metodo para verificar e capturar o carrinho do usuario que esta logado
     if (this.loginService.usuarioLogado != null)
       this.itemCarrinhoService.getCarrinhoByUser(this.loginService.usuarioLogado.idUsuario).subscribe({
         next: carrinho => {
-          console.log(carrinho);
           this.carrinhoUser = carrinho;
         },
         error: erro => {
@@ -50,6 +48,7 @@ export class ProdutosComponent {
 
       });
 
+    //metodo para pegar a lista de produtos do banco para renderizar nos cards de produtos
     this.produtosService.listAll().subscribe({
       next: lista => {
         this.lista = lista;
@@ -67,6 +66,7 @@ export class ProdutosComponent {
 
   }
 
+  //metodo chamado ao clickar no botao "add ao carinho" 
   save(produto: Produto) {
 
     if (!produto || !produto.idProduto) {
@@ -92,9 +92,9 @@ export class ProdutosComponent {
         this.itemCarrinho = this.carrinhoUser.itemCarrinho[i];
         this.itemCarrinho.quantProd += 1;
 
-      let carrinhoTemp = new Carrinho();
-      carrinhoTemp.idCarrinho = this.carrinhoUser.idCarrinho;
-      this.itemCarrinho.carrinho = carrinhoTemp;
+        let carrinhoTemp = new Carrinho();
+        carrinhoTemp.idCarrinho = this.carrinhoUser.idCarrinho;
+        this.itemCarrinho.carrinho = carrinhoTemp;
 
         this.itemCarrinhoService.update(this.itemCarrinho, id).subscribe({
           next: mensagem => {
@@ -112,7 +112,6 @@ export class ProdutosComponent {
               icon: 'error',
               confirmButtonText: 'Ok',
             });
-            console.log(erro);
           }
         });
 
@@ -123,14 +122,16 @@ export class ProdutosComponent {
     }
 
     if (!itemEncontrado) {
-      this.itemCarrinho = new ItemCarrinho(1, produto);
+
       let carrinhoTemp = new Carrinho();
       carrinhoTemp.idCarrinho = this.carrinhoUser.idCarrinho;
-      this.itemCarrinho.carrinho = carrinhoTemp;
+      
+      let itemCarrinhoTemp = new ItemCarrinho();
+      itemCarrinhoTemp.carrinho = carrinhoTemp;
+      itemCarrinhoTemp.quantProd = 1; 
+      itemCarrinhoTemp.produto = produto;
 
-      console.log(this.itemCarrinho);
-
-      this.itemCarrinhoService.save(this.itemCarrinho).subscribe({
+      this.itemCarrinhoService.save(itemCarrinhoTemp).subscribe({
         next: mensagem => {
           Swal.fire({
             title: mensagem,
@@ -145,25 +146,18 @@ export class ProdutosComponent {
             icon: 'error',
             confirmButtonText: 'Ok',
           });
-          console.log(erro);
         }
       });
 
     }
-    console.log(itemEncontrado);
   }
 
   btnClicked(produto: Produto) {
     this.save(produto);
-
   }
-
-
-
 
   constructor() {
     this.listAll();
-
   }
 
 }

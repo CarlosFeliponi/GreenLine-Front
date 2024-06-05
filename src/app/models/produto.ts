@@ -1,3 +1,5 @@
+import { Categoria } from "./categoria";
+import { ItemCarrinho } from "./item-carrinho";
 
 export class Produto {
     idProduto!: number;
@@ -6,13 +8,7 @@ export class Produto {
     descricaoProduto!: string;
 
     fornecedor!: object;
-    itemCarrinho!: object;
-    categoria!: object;
+    itemCarrinho!: ItemCarrinho;
+    categoria!: Categoria;
 
-    constructor(nomeProduto: string, valorProduto: number, descricaoProduto: string){
-        this.nomeProduto = nomeProduto;
-        this.valorProduto = valorProduto;   
-        this.descricaoProduto = descricaoProduto;   
-
-    }
 }
