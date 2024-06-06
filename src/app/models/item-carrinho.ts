@@ -9,9 +9,9 @@ export class ItemCarrinho {
     produto!: Produto;
     carrinho!: Carrinho;
 
-    constructor(valorUnitario: number, quantProd: number){
-        this.valorUnitario = valorUnitario;
-        this.quantProd = quantProd;
+    constructor(quantProd: number, produto: Produto){
+    this.quantProd = quantProd;
+    this.produto = produto;
     }
 
 }

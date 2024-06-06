@@ -10,7 +10,7 @@
             <form #usuarioForm="ngForm">
               <div class="form-group">
                 <p class="text-white">Email</p>
-                <input type="email" class="form-control no-border text-white" id="inputEmail" name="emailUsuario" readonly>
+                <input type="email" class="form-control no-border text-white" id="inputEmail" name="emailUsuario" [(ngModel)]="cliente.usuario.emailUsuario"  readonly>
               </div>
               <br>
               <div class="form-group">
@@ -28,14 +28,14 @@
               <div class="form-group">
                 <p class="text-white">Endereço</p>
                 <div class="form-inline">
-                  <input type="text" class="form-control no-border custom-input text-white" id="inputNome" name="enderecoUsuario">
+                  <input type="text" class="form-control no-border custom-input text-white" id="inputEndereco" [(ngModel)]="cliente.enderecoCliente" name="enderecoUsuario">
                 </div>
               </div>
               <br>
               <div class="form-group">
                 <p class="text-white">Telefone</p>
                 <div class="form-inline">
-                  <input type="text" class="form-control no-border custom-input text-white" id="inputNome" name="telefoneUsuario" >
+                  <input type="text" class="form-control no-border custom-input text-white" id="inpuTelefone" [(ngModel)]="cliente.telefoneCliente" name="telefoneUsuario" >
                 </div>
               </div>
               <br>
