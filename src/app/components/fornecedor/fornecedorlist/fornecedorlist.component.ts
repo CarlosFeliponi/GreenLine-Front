@@ -5,7 +5,6 @@ import { Fornecedor } from '../../../models/fornecedor';
 import { MdbModalModule, MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { FornecedordetailsComponent } from '../fornecedordetails/fornecedordetails.component';
 import { FornecedorService } from '../../../services/fornecedor.service';
-import { ListKeyManager } from '@angular/cdk/a11y';
 import Swal from 'sweetalert2';
 
 
@@ -79,7 +78,7 @@ export class FornecedorlistComponent {
 
 
         this.fornecedorService.delete(fornecedor.idFornecedor).subscribe({
-          next: mensagem => { //quando o back retornar o que se espera
+          next: mensagem => {
             Swal.fire({
               title: mensagem,
               icon: 'success',
@@ -87,7 +86,7 @@ export class FornecedorlistComponent {
             });
             this.listAll();
           },
-          error: erro => { //quando ocorrer qualquer erro (badrequest, exceptions..)
+          error: erro => { 
             Swal.fire({
               title: 'Ocorreu um erro',
               icon: 'error',
