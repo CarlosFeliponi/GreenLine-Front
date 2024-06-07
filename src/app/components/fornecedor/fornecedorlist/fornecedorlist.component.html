@@ -35,7 +35,11 @@
                                 <td>{{fornecedor.nomeFornecedor}}</td>
                                 <td>{{fornecedor.cnpj}}</td>
                                 <td>{{fornecedor.emailFornecedor}}</td>
-                                <td>{{fornecedor.produto.nomeProduto}}</td>
+                                <td>
+                                    @for (produto of fornecedor.produto; track $index) {
+                                    {{produto.nomeProduto}}<br>
+                                }
+                                </td>
                                 <td class="direita">
                                     <button type="button" class="btn btn-primary btn-rounded" mbRipple (click)="edit(fornecedor)">
                                         Editar

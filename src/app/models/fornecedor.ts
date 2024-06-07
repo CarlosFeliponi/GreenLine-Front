@@ -6,5 +6,5 @@ export class Fornecedor {
     nomeFornecedor!: string;
     cnpj!: string;
     emailFornecedor!: string;
-    produto!: Produto;
+    produto!: Produto[];
 }
