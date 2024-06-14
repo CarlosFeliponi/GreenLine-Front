@@ -1,16 +1,28 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Cadastro } from '../models/cadastro'; // Ajuste o caminho conforme necessário
 import { Usuario } from '../models/usuario';
+import { LoginService } from './login.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
-   API_CADASTRO = 'http://localhost:8080/api/usuario';
    API_USUARIO = 'http://localhost:8080/api/cliente';
 
+   http = inject(HttpClient);
 
-  constructor() { }
+  findByUsuarioId(idUsuarioLogado: number): Observable<Usuario>{
+    return this.http.get<Usuario>(this.API_USUARIO+"/findByUsuarioId/"+idUsuarioLogado);
+  }
+
+  update(usuario: Usuario, idCliente: number): Observable<string>{
+    return this.http.put<string>(this.API_USUARIO+"/update/"+idCliente, usuario,  {responseType: 'text' as 'json'});
+
+  }
+  save(usuario: Usuario): Observable<string>{
+    return this.http.post<string>(this.API_USUARIO+"/save", usuario,  {responseType: 'text' as 'json'});
+
+  }
+
 }
