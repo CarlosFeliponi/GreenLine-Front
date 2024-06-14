@@ -9,6 +9,7 @@ import { ItemCarrinhoService } from '../../services/item-carrinho.service';
 import { ItemCarrinho } from '../../models/item-carrinho';
 import { Carrinho } from '../../models/carrinho';
 import { LoginService } from '../../services/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-produtos',
@@ -29,9 +30,13 @@ export class ProdutosComponent {
   itemCarrinhoService = inject(ItemCarrinhoService);
   loginService = inject(LoginService);//injetando a service de login para verificar o usuario logado
 
+  router = inject(Router);
+
   listAll() {
 
     //metodo para verificar e capturar o carrinho do usuario que esta logado
+
+    
     if (this.loginService.usuarioLogado != null)
       this.itemCarrinhoService.getCarrinhoByUser(this.loginService.usuarioLogado.idUsuario).subscribe({
         next: carrinho => {
@@ -82,6 +87,11 @@ export class ProdutosComponent {
 
     let itemEncontrado = false;
 
+    if(this.carrinhoUser == null){
+      alert ('Você não está logado! Redirecionando para a tela de login!');
+      this.router.navigate(['/login']);
+    }
+
     //loop para verificar se o item ja existe no item_carrinho, caso exista icrementa 1 na quantidade produto
     if(this.carrinhoUser.itemCarrinho != null)
     for (let i = 0; i < this.carrinhoUser.itemCarrinho.length; i++) {
@@ -125,11 +135,18 @@ export class ProdutosComponent {
 
       let carrinhoTemp = new Carrinho();
       carrinhoTemp.idCarrinho = this.carrinhoUser.idCarrinho;
+
+      let produtoTemp = new Produto();
+      produtoTemp.idProduto = produto.idProduto;
+      produtoTemp.valorProduto = produto.valorProduto;
       
       let itemCarrinhoTemp = new ItemCarrinho();
       itemCarrinhoTemp.carrinho = carrinhoTemp;
       itemCarrinhoTemp.quantProd = 1; 
-      itemCarrinhoTemp.produto = produto;
+      itemCarrinhoTemp.produto = produtoTemp;
+      itemCarrinhoTemp.valorUnitario = produto.valorProduto;
+
+      console.log(itemCarrinhoTemp);
 
       this.itemCarrinhoService.save(itemCarrinhoTemp).subscribe({
         next: mensagem => {
