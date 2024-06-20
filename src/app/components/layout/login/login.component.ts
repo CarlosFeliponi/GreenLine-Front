@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { LoginService } from '../../../services/login.service';
-import { Login } from '../../../models/login';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { Autenticador } from '../../../auth/autenticador';
+import { LoginService } from '../../../auth/login.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -13,33 +13,35 @@ import Swal from 'sweetalert2';
 })
 
 export class LoginComponent {
-  loginData: Login = new Login('','') // Certifique-se de que o modelo Usuario está importado corretamente
+  loginData: Autenticador = new Autenticador() // Certifique-se de que o modelo Usuario está importado corretamente
   erroLogin: boolean = false;
   
 
   constructor(private loginService: LoginService, public router: Router) {}
 
   logar() {
-    this.loginService.login(this.loginData).subscribe(
-      usuarioLogado => {
-        console.log(usuarioLogado);
+    this.loginService.login(this.loginData).subscribe({
+      next: token => {
+        console.log(token);
         Swal.fire({
           title: 'Bem vindo',
           icon: 'success',
           confirmButtonText: 'Ok',
         });      
-      this.loginService.usuarioLogado = usuarioLogado;
+      if(token){
+        this.loginService.addToken(token);
+      }
       //obs: verificar
       this.router.navigate(['']);
       },
-      error => {
+      error: error => {
         Swal.fire({
           title: 'Ocorreu um erro, login inexistente',
           icon: 'error',
           confirmButtonText: 'Ok',
         });
       }
-    );
+    });
     
   }
 }

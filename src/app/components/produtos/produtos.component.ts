@@ -8,7 +8,7 @@ import { NavbarComponent } from "../layout/navbar/navbar.component";
 import { ItemCarrinhoService } from '../../services/item-carrinho.service';
 import { ItemCarrinho } from '../../models/item-carrinho';
 import { Carrinho } from '../../models/carrinho';
-import { LoginService } from '../../services/login.service';
+import { LoginService } from '../../auth/login.service';
 
 @Component({
   selector: 'app-produtos',
@@ -32,8 +32,8 @@ export class ProdutosComponent {
   listAll() {
 
     //metodo para verificar e capturar o carrinho do usuario que esta logado
-    if (this.loginService.usuarioLogado != null)
-      this.itemCarrinhoService.getCarrinhoByUser(this.loginService.usuarioLogado.idUsuario).subscribe({
+    if (this.loginService.getUsuarioLogado() != null)
+      this.itemCarrinhoService.getCarrinhoByUser(this.loginService.getUsuarioLogado().idUsuario).subscribe({
         next: carrinho => {
           this.carrinhoUser = carrinho;
         },

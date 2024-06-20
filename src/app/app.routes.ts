@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { MainLayoutComponent } from './components/layout/main-layout/main-layout.component';
 import { AdminLayoutComponent } from './components/layout/admin/admin-layout/admin-layout.component';
+import { loginguardGuard } from './auth/loginguard.guard';
 
 
 export const routes: Routes = [
@@ -47,7 +48,7 @@ export const routes: Routes = [
     },
 
 
-    { path: 'admin', component: AdminLayoutComponent, children: [
+    { path: 'admin', component: AdminLayoutComponent, canActivate: [loginguardGuard], children: [
         {
             path: 'produtoslist',
             loadComponent: () => import('./components/produtos/produtoslist/produtoslist.component').then(c => c.ProdutoslistComponent),

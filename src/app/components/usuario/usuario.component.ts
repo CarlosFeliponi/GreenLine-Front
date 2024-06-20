@@ -2,7 +2,6 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UsuarioService } from '../../services/usuario.service';
 import { Usuario } from '../../models/usuario';
-import { LoginService } from '../../services/login.service';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import {
@@ -12,6 +11,7 @@ import {
 } from 'mdb-angular-ui-kit/modal';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { Login } from '../../models/login';
+import { LoginService } from '../../auth/login.service';
 
 @Component({
   selector: 'app-usuario',
@@ -34,12 +34,12 @@ export class UsuarioComponent {
   }
 
   findByUsuarioId() {
-    if (this.loginService.usuarioLogado == null) {
+    if (this.loginService.getUsuarioLogado() == null) {
       alert(`Fazer login novamente`);
       this.router.navigate([`home`]);
     } else
       this.usuarioService
-        .findByUsuarioId(this.loginService.usuarioLogado.idUsuario)
+        .findByUsuarioId(this.loginService.getUsuarioLogado().idUsuario)
         .subscribe({
           next: (cliente) => {
             console.log(cliente);
@@ -57,12 +57,12 @@ export class UsuarioComponent {
   }
 
   findByLoginId() {
-    if (this.loginService.usuarioLogado == null) {
+    if (this.loginService.getUsuarioLogado() == null) {
       alert(`Fazer login novamente`);
       this.router.navigate([`home`]);
     } else
       this.loginService
-        .findByLoginId(this.loginService.usuarioLogado.idUsuario)
+        .findByLoginId(this.loginService.getUsuarioLogado().idUsuario)
         .subscribe({
           next: (usuario) => {
             console.log(usuario);
@@ -75,7 +75,7 @@ export class UsuarioComponent {
   }
 
   update() {
-    if (this.loginService.usuarioLogado == null) {
+    if (this.loginService.getUsuarioLogado() == null) {
       alert(`Faça o login antes de atualizar`);
       this.router.navigate([`home`]);
     } else {

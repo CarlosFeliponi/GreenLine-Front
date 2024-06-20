@@ -8,6 +8,7 @@ export class Carrinho {
     valorCarrinho!: number;
     itemCarrinho!: ItemCarrinho[];
     usuario!: Usuario;
+    dataCarrinho!: any;
     status!: string;  
 
 }
