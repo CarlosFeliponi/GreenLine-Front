@@ -3,6 +3,7 @@ export class Cadastro {
     emailUsuario!: string;
     senhaUsuario!: string;
     confirmacaoSenha!:string;
+    role!: string;
     
     constructor(idUsuario: number, emailUsuario: string, senhaUsuario: string, confirmacaoSenha:string) {
       this.idUsuario = idUsuario;

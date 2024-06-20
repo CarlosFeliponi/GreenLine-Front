@@ -51,6 +51,7 @@ export class CadastroComponent {
     }
     
     if (this.cadastro.senhaUsuario === this.cadastro.confirmacaoSenha){
+      this.cadastro.role = 'USER';
     this.cadastroService.save(this.cadastro).subscribe({
       next: mensagem => {
         Swal.fire({
