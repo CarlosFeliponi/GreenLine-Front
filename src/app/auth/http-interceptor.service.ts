@@ -8,9 +8,10 @@ export const meuhttpInterceptor: HttpInterceptorFn = (request, next) => {
   let router = inject(Router);
 
   let token = localStorage.getItem('token');
-  if (token && !router.url.includes('/login')) {
+
+  if (token && !router.url.includes('/login') && !router.url.includes('/cadastro')) {
     request = request.clone({
-      setHeaders: { Authorization: 'Bearer ' + token },
+      setHeaders: { Authorization: 'Bearer ' + token },
     });
   }
 
@@ -24,7 +25,7 @@ export const meuhttpInterceptor: HttpInterceptorFn = (request, next) => {
           router.navigate(['/login']);
         } else if (err.status === 403) {
           alert('403 - tratar aqui');
-		  router.navigate(['/login']);
+		      router.navigate(['/login']);
         } else {
           console.error('HTTP error:', err);
         }
