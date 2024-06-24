@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { ItemCarrinho } from '../../../../models/item-carrinho';
 import { CommonModule } from '@angular/common';
 import { ItemCarrinhoService } from '../../../../services/item-carrinho.service';
@@ -14,91 +14,26 @@ import Swal from 'sweetalert2';
 })
 export class CarrinhoItemComponent {
 
-  lista: ItemCarrinho[] = [];
+  @Input() itemCarrinho!: ItemCarrinho;
+  @Output() retorno = new EventEmitter(); // Emite a contagem de produtos distintos para o componente pai
 
   itemCarrinhoService = inject(ItemCarrinhoService);
 
   value: number = 0;
 
-
-  increment(itemCarrinho: ItemCarrinho) {
-    itemCarrinho.quantProd++;
+  increment() {
+    this.retorno.emit( {tipo: 1, itemCarrinho: this.itemCarrinho} ); // 1: incrementar, 2: decrementar e 0: deletar
   }
 
-  decrement( itemCarrinho: ItemCarrinho) {
-    if (itemCarrinho.quantProd > 0){
-    itemCarrinho.quantProd--;
-    }
+  decrement() {
+    if(this.itemCarrinho.quantProd == 1)
+      this.delete();
+    else
+      this.retorno.emit( {tipo: 2, itemCarrinho: this.itemCarrinho} ); // 1: incrementar, 2: decrementar e 0: deletar
   }
 
-  constructor() {
-    this.listAll();
-  }
+  delete() {
+    this.retorno.emit( {tipo: 0, itemCarrinho: this.itemCarrinho} ); // 1: incrementar, 2: decrementar e 0: deletar
 
-  listAll() {
-    this.itemCarrinhoService.listAll().subscribe({
-      next: lista => {
-        this.lista = lista;
-      },
-      error: erro => {
-        Swal.fire({
-          title: 'Ocorreu um erro',
-          icon: 'error',
-          confirmButtonText: 'Ok',
-        });
-      }
-    });
-  }
-
-  // updateQuantity(carrinho: Carrinho, increment: boolean) {
-  //   const newQuantity = increment ? carrinho.quantProd + 1 : carrinho.quantProd - 1;
-  //   if (newQuantity < 0) {
-  //     return; // Evita quantidade negativa
-  //   }
-  //   this.carrinhoService.updateQuantity(carrinho.idItem, newQuantity).subscribe({
-  //     next: updatedCarrinho => {
-  //       carrinho.quantProd = updatedCarrinho.quantProd;
-  //     },
-  //     error: erro => {
-  //       Swal.fire({
-  //         title: 'Ocorreu um erro ao atualizar a quantidade',
-  //         icon: 'error',
-  //         confirmButtonText: 'Ok',
-  //       });
-  //     }
-  //   });
-  // }
-
-
-
-  delete(itemCarrinho: ItemCarrinho) {
-    Swal.fire({
-      title: 'Tem certeza que deseja deletar este registro?',
-      icon: 'warning',
-      showConfirmButton: true,
-      showDenyButton: true,
-      confirmButtonText: 'Sim',
-      cancelButtonText: 'Não',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.itemCarrinhoService.delete(itemCarrinho.idItem).subscribe({
-          next: mensagem => {
-            Swal.fire({
-              title: mensagem,
-              icon: 'success',
-              confirmButtonText: 'Ok',
-            });
-            this.listAll();
-          },
-          error: erro => {
-            Swal.fire({
-              title: 'Ocorreu um erro',
-              icon: 'error',
-              confirmButtonText: 'Ok',
-            });
-          }
-        });
-      }
-    });
   }
 }

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { ItemCarrinho } from '../../../../models/item-carrinho';
 import { CommonModule } from '@angular/common';
 import { ItemCarrinhoService } from '../../../../services/item-carrinho.service';
@@ -14,4 +14,6 @@ import Swal from 'sweetalert2';
 })
 export class CarrinhoCardComponent {
 
-  }
+  @Input() total: number = 0;
+  @Input() frete: number = 0;
+}
