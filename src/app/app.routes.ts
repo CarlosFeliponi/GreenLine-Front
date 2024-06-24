@@ -83,6 +83,11 @@ export const routes: Routes = [
             path: 'fornecedordetails',
             loadComponent: () => import('./components/fornecedor/fornecedordetails/fornecedordetails.component').then(c => c.FornecedordetailsComponent),
             title:'GreenLine | Editagem de Categorias'
-        }
+        },
+        {
+            path: 'clienteslist',
+            loadComponent: () => import('./components/listagem-clientes/listagem-clientes.component').then(c => c.ListagemClientesComponent),
+            title:'GreenLine | Listagem de Clientes'
+        },
     ]}
 ];
