@@ -1,6 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CarrinhoService } from '../../services/carrinho.service';
-import { Carrinho } from '../../models/carrinho';
 import Swal from 'sweetalert2';
 import { Chart, registerables } from 'chart.js';
 import { VendasMensais } from '../../models/vendas-mensais';
@@ -87,7 +86,7 @@ export class GraficoVendasDashComponent implements OnInit{
           y: {
             title: {
               display: true,
-              text: 'Valor de Vendas'
+              text: 'Valor de Vendas (R$)'
             }
           }
         }
