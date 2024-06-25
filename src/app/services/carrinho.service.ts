@@ -31,4 +31,8 @@ export class CarrinhoService {
     return this.http.get<Carrinho[]>(this.API + "/getVendasFinalizadas");
   }
   
+  save(carrinho: Carrinho): Observable<string>{
+    return this.http.post<string>(this.API + "/save", carrinho, {responseType: 'text' as 'json'});
+  }
+  
 }
