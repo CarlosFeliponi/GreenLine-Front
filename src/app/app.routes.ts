@@ -50,6 +50,11 @@ export const routes: Routes = [
 
     { path: 'admin', component: AdminLayoutComponent, canActivate: [loginguardGuard], children: [
         {
+            path: 'dashboard',
+            loadComponent: () => import('./components/grafico-vendas-dash/grafico-vendas-dash.component').then(c => c.GraficoVendasDashComponent),
+            title:'Admin | Dashboard'
+        },
+        {
             path: 'produtoslist',
             loadComponent: () => import('./components/produtos/produtoslist/produtoslist.component').then(c => c.ProdutoslistComponent),
             title:'Admin | Listagem de Produtos'
