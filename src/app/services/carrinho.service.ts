@@ -26,5 +26,9 @@ export class CarrinhoService {
   ListVendasByMonthForLast12Months(): Observable<VendasMensais[]>{
     return this.http.get<VendasMensais[]>(this.API + "/ListVendasByMonthForLast12Months");
   }
+
+  getVendasFinalizadas(): Observable<Carrinho[]>{
+    return this.http.get<Carrinho[]>(this.API + "/getVendasFinalizadas");
+  }
   
 }

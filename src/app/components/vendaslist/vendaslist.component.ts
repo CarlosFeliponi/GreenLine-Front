@@ -13,11 +13,14 @@ import Swal from 'sweetalert2';
 export class VendaslistComponent {
   lista: Carrinho[]=[];
   
-  vendasService = inject(CarrinhoService);
+  carrinhoService = inject(CarrinhoService);
 
+  constructor() {
+    this.vendasFinalizadas();
+  }
   
-  listAll(){
-    this.vendasService.listAll().subscribe({
+  vendasFinalizadas(){
+    this.carrinhoService.getVendasFinalizadas().subscribe({
       next: lista => {
         this.lista = lista;
       },
@@ -35,7 +38,7 @@ export class VendaslistComponent {
 
     Swal.fire({
       title: "Atenção",
-      text: "deseja deletar a categoria?",
+      text: "deseja deletar a venda?",
       icon: "warning",
       showConfirmButton: true,
       showDenyButton: true,
@@ -44,7 +47,7 @@ export class VendaslistComponent {
     }).then((result) => {
 
       if (result.isConfirmed){
-        this.vendasService.delete(carrinho.idCarrinho).subscribe({
+        this.carrinhoService.delete(carrinho.idCarrinho).subscribe({
           next: mensagem => {
             Swal.fire({
               title: "SUCESSO",
@@ -53,7 +56,7 @@ export class VendaslistComponent {
               confirmButtonText: 'OK',
             });
 
-            this.listAll();
+            this.vendasFinalizadas();
           },
           error: erro =>{
             Swal.fire({
