@@ -13,14 +13,14 @@ import { Carrinho } from '../../models/carrinho';
 @Component({
   selector: 'app-carrinho',
   standalone: true,
-  imports: [CarrinhoItemComponent, CarrinhoCardComponent, FooterComponent,NavbarComponent],
+  imports: [CarrinhoItemComponent, CarrinhoCardComponent, FooterComponent, NavbarComponent],
   templateUrl: './carrinho.component.html',
   styleUrl: './carrinho.component.scss'
 })
 
 export class CarrinhoComponent {
 
-  
+
   loginService = inject(LoginService);
   itemCarrinhoService = inject(ItemCarrinhoService);
   router = inject(Router);
@@ -46,10 +46,11 @@ export class CarrinhoComponent {
           this.carrinhoUser = carrinho;
 
           this.total = 0;
-          
-          for(let i=0; i<carrinho.itemCarrinho.length; i++){
-            this.total += (carrinho.itemCarrinho[i].valorUnitario * carrinho.itemCarrinho[i].quantProd);
-          }
+
+          if (carrinho != null)
+            for (let i = 0; i < carrinho.itemCarrinho.length; i++) {
+              this.total += (carrinho.itemCarrinho[i].valorUnitario * carrinho.itemCarrinho[i].quantProd);
+            }
 
         },
         error: erro => {
