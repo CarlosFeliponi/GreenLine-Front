@@ -12,15 +12,17 @@
                                 <div class="d-flex justify-content-between align-items-center mb-4">
                                     <div>
                                         <p class="mb-1">Itens do carrinho</p>
-                                        <p class="mb-0">Você tem 4 itens em seu carrinho</p>
+                                        <p class="mb-0">Você tem {{ carrinhoUser?.itemCarrinho?.length }} itens em seu carrinho</p>
                                     </div>
                                 </div>
-
-                                <app-carrinho-item></app-carrinho-item>
-
+                        @if(carrinhoUser != null){
+                            @for (itemCarrinho of carrinhoUser.itemCarrinho; track $index) {
+                                <app-carrinho-item [itemCarrinho]="itemCarrinho" (retorno)="retornoCarrinhoItem($event)"></app-carrinho-item>
+                            }
+                        }
                             </div>
                             <div class="col-lg-5">
-                                <app-carrinho-card></app-carrinho-card>
+                                <app-carrinho-card [total]="total" [frete]="frete"></app-carrinho-card>
                   
                             </div>
                         </div>

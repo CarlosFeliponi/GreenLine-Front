@@ -1,4 +1,5 @@
 import { ItemCarrinho } from "./item-carrinho";
+import { Login } from "./login";
 import { Usuario } from "./usuario";
 
 export class Carrinho {
@@ -7,7 +8,7 @@ export class Carrinho {
     descricaoCarrinho!: string;
     valorCarrinho!: number;
     itemCarrinho!: ItemCarrinho[];
-    usuario!: Usuario;
+    usuario!: Login;
     dataCarrinho!: any;
     status!: string;  
 
