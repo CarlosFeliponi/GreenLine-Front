@@ -17,7 +17,9 @@ export class LoginComponent {
   erroLogin: boolean = false;
   
 
-  constructor(private loginService: LoginService, public router: Router) {}
+  constructor(private loginService: LoginService, public router: Router) {
+    loginService.removerToken();
+  }
 
   logar() {
     this.loginService.login(this.loginData).subscribe({
@@ -31,7 +33,9 @@ export class LoginComponent {
       if(token){
         this.loginService.addToken(token);
       }
-      //obs: verificar
+
+
+            //obs: verificar
       this.router.navigate(['']);
       },
       error: error => {
