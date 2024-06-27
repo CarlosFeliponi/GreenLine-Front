@@ -4,6 +4,7 @@ import { ItemCarrinho } from '../models/item-carrinho';
 
 import { Observable } from 'rxjs';
 import { Carrinho } from '../models/carrinho';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class ItemCarrinhoService {
 
   http = inject(HttpClient);
 
-  API = "http://localhost:8080/api/itemcarrinho";
+  API = environment.SERVIDOR+"/api/itemcarrinho";
 
   constructor() { }
 
