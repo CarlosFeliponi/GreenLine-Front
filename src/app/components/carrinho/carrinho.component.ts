@@ -37,9 +37,19 @@ export class CarrinhoComponent {
 
 
   listCarrinhoDoUser() {
-    if (this.loginService.getUsuarioLogado() == null) {
-      alert('Você não está logado! Redirecionando para a tela de login!');
-      this.router.navigate(['/login']);
+    if (this.loginService.getUsuarioLogado().idUsuario == null) {
+        Swal.fire({
+        title: 'Erro',
+        text: 'Para acessar o carrinho deve estar logado',
+        icon: 'warning',
+        confirmButtonText: 'Login',
+        showCancelButton: true,
+        cancelButtonText: 'cancelar',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.router.navigate(['login']);
+        }
+      });
     } else
       this.itemCarrinhoService.getCarrinhoByUser(this.loginService.getUsuarioLogado().idUsuario).subscribe({
         next: carrinho => {
