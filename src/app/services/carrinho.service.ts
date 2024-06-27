@@ -3,6 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Carrinho } from '../models/carrinho';
 import { VendasMensais } from '../models/vendas-mensais';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class CarrinhoService {
 
   http = inject(HttpClient);
 
-  API = "http://localhost:8080/api/carrinho";
+  API = environment.SERVIDOR+"/api/carrinho";
   
   constructor() { }
 
