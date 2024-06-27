@@ -37,6 +37,11 @@
                                 <td>{{fornecedor.emailFornecedor}}</td>
                                
                                 <td class="direita">
+                                    @if(EsconderBotoes) {
+                                    <button type="button" class="btn btn-primary btn-rounded" mbRipple (click)="selec(fornecedor)">
+                                        Selecionar
+                                    </button>
+                                    }
                                     <button type="button" class="btn btn-primary btn-rounded" mbRipple (click)="edit(fornecedor)">
                                         Editar
                                     </button>

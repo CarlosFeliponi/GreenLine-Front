@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, TemplateRef, ViewChild, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, TemplateRef, ViewChild, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Fornecedor } from '../../../models/fornecedor';
 import { MdbModalModule, MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
@@ -16,6 +16,9 @@ import Swal from 'sweetalert2';
   styleUrl: './fornecedorlist.component.scss'
 })
 export class FornecedorlistComponent {
+
+  @Input("esconderBotoes") EsconderBotoes: boolean = false;
+  @Output("retorno") retorno = new EventEmitter<any>();
 
   lista: Fornecedor[] = [];
   fornecedorEdit: Fornecedor = new Fornecedor();
@@ -113,5 +116,9 @@ export class FornecedorlistComponent {
   retornoDetalhe(fornecedor: Fornecedor){
     this.listAll();
     this.modalRef.close();
+  }
+
+  selec(fornecedor: Fornecedor){
+    this.retorno.emit(fornecedor);
   }
 }

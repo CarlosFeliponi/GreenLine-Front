@@ -1,4 +1,5 @@
 import { Categoria } from "./categoria";
+import { Fornecedor } from "./fornecedor";
 import { ItemCarrinho } from "./item-carrinho";
 
 export class Produto {
@@ -7,7 +8,7 @@ export class Produto {
     valorProduto!: number;
     descricaoProduto!: string;
 
-    fornecedor!: object;
+    fornecedor!: Fornecedor;
     itemCarrinho!: ItemCarrinho;
     categoria!: Categoria;
 

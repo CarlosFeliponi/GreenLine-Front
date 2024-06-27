@@ -24,6 +24,19 @@
           </mdb-form-control>
           <br>
           <br>
+
+          @if(produto.fornecedor == null) {
+            <button type="button" class="btn btn-primary btn-rounded" mdbRipple (click)="buscarFornecedor()">
+              Buscar Fornecedor
+            </button>
+          }@else {
+            <span>Fornecedor: {{produto.fornecedor.nomeFornecedor}}</span>
+
+            <button type="button" class="btn btn-warning btn-rounded" mdbRipple (click)="buscarFornecedor()">
+              Trocar Fornecedor
+            </button>
+          }
+
           <button type="button" class="btn btn-primary btn-rounded" mdbRipple (click)="save()">
             Salvar
           </button>
@@ -33,3 +46,21 @@
     </div>
   </div>
 </div>
+
+<ng-template #modalFornecedorList>
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Cadastro Produto</h5>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modalRef.close()"
+    ></button>
+  </div>
+  <div class="modal-body">
+  
+    <app-fornecedorlist [esconderBotoes]="true" (retorno)="retornoFornecedor($event)"></app-fornecedorlist>
+  
+  </div>
+  
+  </ng-template>
