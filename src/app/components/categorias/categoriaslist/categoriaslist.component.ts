@@ -20,7 +20,7 @@ export class CategoriaslistComponent {
 
   //ELEMENTOS DA MODAL
   modalService = inject(MdbModalService); // para conseguir abrir a modal
-  @ViewChild("modalCarroDetalhe") modalCategoriaDetalhe!: TemplateRef<any>;
+  @ViewChild("modalCategoriaDetalhe") modalCategoriaDetalhe!: TemplateRef<any>;
   modalRef!: MdbModalRef<any>;
 
   categoriaService = inject(CategoriaService);
