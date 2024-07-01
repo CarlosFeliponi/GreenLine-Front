@@ -9,13 +9,14 @@ import { ItemCarrinhoService } from '../../services/item-carrinho.service';
 import { ItemCarrinho } from '../../models/item-carrinho';
 import { Carrinho } from '../../models/carrinho';
 import { LoginService } from '../../auth/login.service';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-produtos',
   standalone: true,
   templateUrl: './produtos.component.html',
   styleUrl: './produtos.component.scss',
-  imports: [ProdutosCardComponent, FooterComponent, NavbarComponent]
+  imports: [ProdutosCardComponent, FooterComponent, NavbarComponent, RouterLink]
 })
 export class ProdutosComponent {
 
@@ -25,6 +26,7 @@ export class ProdutosComponent {
 
   produto: any;//serve para mandar o objeto produto para o componente filho(produto-card)
 
+  router = inject(Router);
   produtosService = inject(ProdutosService);
   itemCarrinhoService = inject(ItemCarrinhoService);
   loginService = inject(LoginService);//injetando a service de login para verificar o usuario logado
@@ -32,7 +34,7 @@ export class ProdutosComponent {
   listAll() {
 
     //metodo para verificar e capturar o carrinho do usuario que esta logado
-    if (this.loginService.getUsuarioLogado() != null)
+    if (this.loginService.getUsuarioLogado().idUsuario != null)
       this.itemCarrinhoService.getCarrinhoByUser(this.loginService.getUsuarioLogado().idUsuario).subscribe({
         next: carrinho => {
           this.carrinhoUser = carrinho;
@@ -68,35 +70,70 @@ export class ProdutosComponent {
 
   //metodo chamado ao clickar no botao "add ao carinho" 
   save(produto: Produto) {
+    if(this.loginService.getUsuarioLogado().idUsuario != null){
+      if (!produto || !produto.idProduto) {
+        console.error('Produto ou idProduto é nulo:', produto);
+        Swal.fire({
+          title: 'Erro',
+          text: 'Produto inválido',
+          icon: 'error',
+          confirmButtonText: 'Ok',
+        });
+        return;
+      }
 
-    if (!produto || !produto.idProduto) {
-      console.error('Produto ou idProduto é nulo:', produto);
-      Swal.fire({
-        title: 'Erro',
-        text: 'Produto inválido',
-        icon: 'error',
-        confirmButtonText: 'Ok',
-      });
-      return;
-    }
+      let itemEncontrado = false;
 
-    let itemEncontrado = false;
+      //loop para verificar se o item ja existe no item_carrinho, caso exista icrementa 1 na quantidade produto
+      if(this.carrinhoUser.itemCarrinho != null)
+      for (let i = 0; i < this.carrinhoUser.itemCarrinho.length; i++) {
 
-    //loop para verificar se o item ja existe no item_carrinho, caso exista icrementa 1 na quantidade produto
-    if(this.carrinhoUser.itemCarrinho != null)
-    for (let i = 0; i < this.carrinhoUser.itemCarrinho.length; i++) {
+        if (this.carrinhoUser.itemCarrinho[i].produto.idProduto === produto.idProduto) {
 
-      if (this.carrinhoUser.itemCarrinho[i].produto.idProduto === produto.idProduto) {
+          let id = this.carrinhoUser.itemCarrinho[i].idItem;
+          this.itemCarrinho = this.carrinhoUser.itemCarrinho[i];
+          this.itemCarrinho.quantProd += 1;
 
-        let id = this.carrinhoUser.itemCarrinho[i].idItem;
-        this.itemCarrinho = this.carrinhoUser.itemCarrinho[i];
-        this.itemCarrinho.quantProd += 1;
+          let carrinhoTemp = new Carrinho();
+          carrinhoTemp.idCarrinho = this.carrinhoUser.idCarrinho;
+          this.itemCarrinho.carrinho = carrinhoTemp;
+
+          this.itemCarrinhoService.update(this.itemCarrinho, id).subscribe({
+            next: mensagem => {
+              Swal.fire({
+                title: mensagem,
+                icon: 'success',
+                confirmButtonText: 'Ok',
+              });
+              this.listAll();
+            },
+            error: erro => {
+              Swal.fire({
+                title: 'Erro ao atualizar item',
+                text: erro.error?.message || 'Erro desconhecido',
+                icon: 'error',
+                confirmButtonText: 'Ok',
+              });
+            }
+          });
+
+          itemEncontrado = true;
+          break;
+        }
+
+      }
+
+      if (!itemEncontrado) {
 
         let carrinhoTemp = new Carrinho();
         carrinhoTemp.idCarrinho = this.carrinhoUser.idCarrinho;
-        this.itemCarrinho.carrinho = carrinhoTemp;
+        
+        let itemCarrinhoTemp = new ItemCarrinho();
+        itemCarrinhoTemp.carrinho = carrinhoTemp;
+        itemCarrinhoTemp.quantProd = 1; 
+        itemCarrinhoTemp.produto = produto;
 
-        this.itemCarrinhoService.update(this.itemCarrinho, id).subscribe({
+        this.itemCarrinhoService.save(itemCarrinhoTemp).subscribe({
           next: mensagem => {
             Swal.fire({
               title: mensagem,
@@ -107,50 +144,30 @@ export class ProdutosComponent {
           },
           error: erro => {
             Swal.fire({
-              title: 'Erro ao atualizar item',
-              text: erro.error?.message || 'Erro desconhecido',
+              title: erro,
               icon: 'error',
               confirmButtonText: 'Ok',
             });
           }
         });
-
-        itemEncontrado = true;
-        break;
-      }
-
-    }
-
-    if (!itemEncontrado) {
-
-      let carrinhoTemp = new Carrinho();
-      carrinhoTemp.idCarrinho = this.carrinhoUser.idCarrinho;
       
-      let itemCarrinhoTemp = new ItemCarrinho();
-      itemCarrinhoTemp.carrinho = carrinhoTemp;
-      itemCarrinhoTemp.quantProd = 1; 
-      itemCarrinhoTemp.produto = produto;
-
-      this.itemCarrinhoService.save(itemCarrinhoTemp).subscribe({
-        next: mensagem => {
-          Swal.fire({
-            title: mensagem,
-            icon: 'success',
-            confirmButtonText: 'Ok',
-          });
-          this.listAll();
-        },
-        error: erro => {
-          Swal.fire({
-            title: erro,
-            icon: 'error',
-            confirmButtonText: 'Ok',
-          });
-        }
-      });
-
     }
+  }else{
+    Swal.fire({
+      title: 'Erro',
+      text: 'Para adicionar produtos precisa estar logado',
+      icon: 'warning',
+      confirmButtonText: 'Login',
+      showCancelButton: true,
+      cancelButtonText: 'cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.router.navigate(['login']);
+      }
+    });
   }
+
+}
 
   btnClicked(produto: Produto) {
     this.save(produto);

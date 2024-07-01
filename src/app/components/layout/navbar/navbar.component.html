@@ -10,27 +10,43 @@
             </button>
         </form>
         <ul class="d-flex align-items-center p-0 m-0 list-unstyled">
+          @if(loginservice.hasPermission('ADMIN') || loginservice.hasPermission('USER')){
             <li class="px-5">
                 <a routerLink='carrinho'class="text-white">
                     <span><i class="fas fa-shopping-cart fa-xl"></i></span>
                     <span class="badge rounded-pill badge-notification text-black-secundary bg-green-primary">0</span>
                 </a>
             </li>
+          }
             <li mdbDropdown class="nav-link ">
-                <button routerLink='usuario' class="text-white d-flex flex-column align-items-center nav-link border-0" id="navbarDropdownMenuLink" role="button" mdbDropdownToggle aria-expanded="false">
-                    <span><i class="fas fa-user-alt fa-lg"></i></span>
-                    <strong class="font-14">Minha Conta</strong>
+              @if(loginservice.getUsuarioLogado().idUsuario == null){
+                <button routerLink='login' class="text-white d-flex flex-column align-items-center nav-link border-0" id="navbarDropdownMenuLink" role="button" mdbDropdownToggle aria-expanded="false">
+                  <span><i class="fas fa-user-alt fa-lg"></i></span>
+                  <strong class="font-14">Logar</strong>
                 </button>
+              }
+              @if(loginservice.hasPermission('ADMIN') || loginservice.hasPermission('USER')){
+                <button class="text-white d-flex flex-column align-items-center nav-link border-0" id="navbarDropdownMenuLink" role="button" mdbDropdownToggle aria-expanded="false">
+                  <span><i class="fas fa-user-alt fa-lg"></i></span>
+                  <strong class="font-14">Minha Conta</strong>
+                </button>
+              }
                 <ul mdbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <li>
-                      <a class="dropdown-item" routerLink='admin/dashboard'>Meu perfil</a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="#">Editar perfil</a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" routerLink='login'>Sair</a>
-                    </li>
+                    @if(loginservice.hasPermission('ADMIN')){
+                      <li>
+                        <a class="dropdown-item" routerLink='admin/dashboard'>Dashboard</a>
+                      </li>
+                    }
+                    @if(loginservice.hasPermission('ADMIN') || loginservice.hasPermission('USER')){
+                      <li>
+                        <a class="dropdown-item" routerLink='usuario'>Editar perfil</a>
+                      </li>
+                    }
+                    @if(loginservice.hasPermission('ADMIN') || loginservice.hasPermission('USER')){
+                      <li>
+                        <a class="dropdown-item" routerLink='login'>Sair</a>
+                      </li>
+                    }
                   </ul>
             </li>
         </ul>
