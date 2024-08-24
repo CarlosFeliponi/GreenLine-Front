@@ -94,5 +94,10 @@ export const routes: Routes = [
             loadComponent: () => import('./components/listagem-clientes/listagem-clientes.component').then(c => c.ListagemClientesComponent),
             title:'GreenLine | Listagem de Clientes'
         },
+        {
+            path: 'auditoria',
+            loadComponent: () => import('./components/log-auditoria/log-auditoria.component').then(c => c.LogAuditoriaComponent),
+            title:'GreenLine | Log de Auditoria'
+        },
     ]}
 ];
