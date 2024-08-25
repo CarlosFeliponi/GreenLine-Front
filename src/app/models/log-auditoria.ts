@@ -1,7 +1,7 @@
 export class LogAuditoria {
     idLog!:number;
 	emailUsuario!: string;
-	LocalDateTime!: Date;
+	timestamp!: Date;
 	acao!: string;
 	entity!: string;
 	idEntity!: number;

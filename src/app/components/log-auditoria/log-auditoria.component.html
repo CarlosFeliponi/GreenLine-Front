@@ -1,1 +1,70 @@
-<p>log-auditoria works!</p>
+<div class="container">
+  <div class="log-row">
+    <div class="filter-col">
+      <div class="filter-contents">
+        <h2>Filtros</h2>
+        <mdb-accordion [borderless]="true">
+            <mdb-accordion-item>
+              <ng-template mdbAccordionItemHeader class="cwhite">Accordion Item #1</ng-template>
+              <ng-template mdbAccordionItemBody>
+                Placeholder content for this accordion, which is intended to demonstrate the
+                <code>.accordion-borderless</code> class. This is the first item's accordion body.
+              </ng-template>
+            </mdb-accordion-item>
+            <mdb-accordion-item>
+              <ng-template mdbAccordionItemHeader>Accordion Item #2</ng-template>
+              <ng-template mdbAccordionItemBody>
+                Placeholder content for this accordion, which is intended to demonstrate the
+                <code>.accordion-borderless</code> class. This is the second item's accordion body.
+                Let's imagine this being filled with some actual content.
+              </ng-template>
+            </mdb-accordion-item>
+            <mdb-accordion-item>
+              <ng-template mdbAccordionItemHeader>Accordion Item #3</ng-template>
+              <ng-template mdbAccordionItemBody>
+                Placeholder content for this accordion, which is intended to demonstrate the
+                <code>.accordion-borderless</code> class. This is the third item's accordion body.
+                Nothing more exciting happening here in terms of content, but just filling up
+                the space to make it look, at least at first glance, a bit more representative
+                of how this would look in a real-world application.
+              </ng-template>
+            </mdb-accordion-item>
+          </mdb-accordion>
+      </div>
+    </div>
+    <div class="table-col">
+      <h1>Log de Auditoria</h1>
+      <table border="1" class="table table-striped">
+        <thead>
+          <tr>
+            <th (click)="sortById()">ID</th>
+            <th (click)="sortByAcao()">Ação</th>
+            <th>Detalhes</th>
+            <th>Email</th>
+            <th>Entidade</th>
+            <th>Data hora</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of logSortido; track $index) {
+          <tr>
+            <td>{{ item.idLog }}</td>
+            <td>{{ item.acao }}</td>
+            @if(item.detalhes){
+            <td>{{ item.detalhes }}</td>
+            } @else {
+            <td>---</td>
+            } @if(item.emailUsuario){
+            <td>{{ item.emailUsuario }}</td>
+            } @else {
+            <td>---</td>
+            }
+            <td>{{ item.entity }}</td>
+            <td>{{ item.timestamp }}</td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
