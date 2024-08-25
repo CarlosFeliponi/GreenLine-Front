@@ -12,7 +12,7 @@ export class LogAuditoriaService {
   
   http = inject(HttpClient);
 
-  API = environment.SERVIDOR+"/api/logauditoria";
+  API = environment.SERVIDOR+"/api/log";
 
   constructor() { }
 
