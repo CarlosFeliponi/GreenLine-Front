@@ -1,6 +1,8 @@
+<br>
 <div class="container">
-  <div class="log-row">
-    <div class="filter-col">
+  <div class="row">
+    <div class="card">            
+    <!-- <div class="filter-col">
       <div class="filter-contents">
         <h2>Filtros</h2>
         <mdb-accordion [borderless]="true">
@@ -31,36 +33,38 @@
             </mdb-accordion-item>
           </mdb-accordion>
       </div>
-    </div>
-    <div class="table-col">
-      <h1>Log de Auditoria</h1>
+    </div> -->
+    <!-- <div class="table-col"> -->
+    <div class="table-col card-body">
+      <h3>Log de Auditoria</h3>
+      <br><br>
       <table border="1" class="table table-striped">
         <thead>
           <tr>
-            <th (click)="sortById()">ID</th>
-            <th (click)="sortByAcao()">Ação</th>
-            <th>Detalhes</th>
-            <th>Email</th>
-            <th>Entidade</th>
+            <!-- <th (click)="sortById()">ID</th> -->
             <th>Data hora</th>
+            <!-- <th (click)="sortByAcao()">Ação</th> -->
+            <th>Email</th>
+            <th>Operação</th>
+            <th>Entidade</th>
+            <th>Detalhes</th>
           </tr>
         </thead>
         <tbody>
           @for (item of logSortido; track $index) {
           <tr>
-            <td>{{ item.idLog }}</td>
+            <!-- <td>{{ item.idLog }}</td> -->
+            <td>{{ item.timestamp }}</td>
+            @if(item.emailUsuario){
+              <td>{{ item.emailUsuario }}</td>
+            } @else {
+              <td>---</td> }
             <td>{{ item.acao }}</td>
+            <td>{{ item.entity }}</td>
             @if(item.detalhes){
             <td>{{ item.detalhes }}</td>
             } @else {
-            <td>---</td>
-            } @if(item.emailUsuario){
-            <td>{{ item.emailUsuario }}</td>
-            } @else {
-            <td>---</td>
-            }
-            <td>{{ item.entity }}</td>
-            <td>{{ item.timestamp }}</td>
+            <td>---</td> }
           </tr>
           }
         </tbody>
