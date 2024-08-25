@@ -11,7 +11,7 @@
         <i class="fas fa-bars"></i>
       </button>
       <div
-        class="collapse navbar-collapse"
+        class="collapse navbar-collapse navbar-right"
         id="navbarNav"
         mdbCollapse
         #basicNav="mdbCollapse"
@@ -33,12 +33,17 @@
             <a class="nav-link active" routerLink='clienteslist'>Clientes</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" routerLink=''>Home</a>
+            <a class="nav-link active" routerLink='auditoria'>Log</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link active text-danger" routerLink='/login'>Sair</a>
-          </li>
-        </ul>
+          </ul>
+          <ul class="navbar-nav navbar-right">
+            <li class="nav-item">
+              <a class="nav-link active" routerLink=''>Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active text-danger" routerLink='/login'>Sair</a>
+            </li>
+          </ul>
       </div>
     </div>
   </nav>
