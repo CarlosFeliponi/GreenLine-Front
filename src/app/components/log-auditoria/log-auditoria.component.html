@@ -1,18 +1,26 @@
 <br />
 <div class="container">
   <div class="row">
-    <div class="card">            
+    <div class="card">
       <div class="table-col card-body">
         <h3>Log de Auditoria</h3>
-        <br><br>
+        <br /><br />
 
-        <form action="/url" method="post"> <!--ajustar action(aparenta ser a url que ser enviado os dado, verificar se é necessario), method deve ser o metodo http de envio de dados, get, etc -->        
-        
-          <div>  <!-- Search -->
-            <div class="input-group rounded">
-              <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+        <form action="/url" method="post" class="border border-1 p-4">
+          <!--ajustar action(aparenta ser a url que ser enviado os dado, verificar se é necessario), method deve ser o metodo http de envio de dados, get, etc -->
+
+          <!-- Search --><!-- revisar -->
+          <div class="d-flex justify-content-center">
+            <div class="input-group rounded w-50">
+              <input
+                type="search"
+                class="form-control rounded"
+                placeholder="Produto    |   Email"
+                aria-label="Search"
+                aria-describedby="search-addon"
+              />
               <span class="input-group-text border-0" id="search-addon">
-                <i class="fas fa-search"></i> <!-- revisar -->
+                <i class="fas fa-search"></i>
               </span>
             </div>
           </div>
