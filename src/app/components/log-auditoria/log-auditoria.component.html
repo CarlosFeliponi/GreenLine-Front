@@ -28,8 +28,8 @@
           <div class="d-flex align-items-center justify-content-evenly mt-4">
             <!-- margin provisoria-->
 
+            <!-- Role -->
             <div>
-              <!-- Role -->
               <div class="form-check">
                 <input
                   mdbRadio
@@ -99,12 +99,12 @@
             <div>
               <mat-form-field subscriptSizing="dynamic">
                 <mat-label>Operação</mat-label>
-                <mat-select [(value)]="selected">
+                <mat-select [(value)]="params.acao" (valueChange)="findLogsByCriterio()">
                   <!-- <mat-option>Todas</mat-option> -->
-                  <mat-option value="option1">Cadastro</mat-option>
-                  <mat-option value="option2">Exclução</mat-option>
-                  <mat-option value="option3">Atualização</mat-option>
-                  <mat-option value="option4">Login e logout</mat-option>
+                  <mat-option [value]="'SAVE'">Cadastro</mat-option>
+                  <mat-option [value]="'DELETE'">Exclução</mat-option>
+                  <mat-option [value]="'UPDATE'">Atualização</mat-option>
+                  <mat-option [value]="'LOGIN'">Login e logout</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
