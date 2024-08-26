@@ -97,6 +97,7 @@ export class LogAuditoriaComponent {
   sortLog() {
     // Se 'ordem' for true, organiza em ordem crescente.
     if (this.ordem) {
+      console.log('ordem', this.ordem )
       this.logAuditoria.sort(function (a, b) {
         if (a.timestamp < b.timestamp) return -1;
         if (a.timestamp > b.timestamp) return 1;
@@ -110,6 +111,7 @@ export class LogAuditoriaComponent {
         return 0;
       });
     }
+    console.log( this.logAuditoria )
   }
 
   // 'findLogsByCriterio' busca logs com base nos critérios definidos em 'params'.
