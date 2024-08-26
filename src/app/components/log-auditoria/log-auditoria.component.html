@@ -35,11 +35,14 @@
                   mdbRadio
                   class="form-check-input"
                   type="radio"
-                  name="flexRadioDefault"
-                  id="flexRadioDefault1"
+                  name="radioRoleTodos"
+                  id="radioRoleTodos"
                   [checked]="true"
+                  [(ngModel)]="params.roleUsuario"
+                  [value]="undefined"
+                  (change)="findLogsByCriterio()"
                 />
-                <label class="form-check-label" for="flexRadioDefault1">
+                <label class="form-check-label" for="radioRoleTodos">
                   TODOS
                 </label>
               </div>
@@ -48,10 +51,13 @@
                   mdbRadio
                   class="form-check-input"
                   type="radio"
-                  name="flexRadioDefault"
-                  id="flexRadioDefault2"
+                  name="radioRoleAdmin"
+                  id="radioRoleAdmin"
+                  [(ngModel)]="params.roleUsuario"
+                  [value]="'ADMIN'"
+                  (change)="findLogsByCriterio()"
                 />
-                <label class="form-check-label" for="flexRadioDefault2">
+                <label class="form-check-label" for="radioRoleAdmin">
                   ADMIN
                 </label>
               </div>
@@ -60,10 +66,13 @@
                   mdbRadio
                   class="form-check-input"
                   type="radio"
-                  name="flexRadioDefault"
-                  id="flexRadioDefault3"
+                  name="radioRoleUser"
+                  id="radioRoleUser"
+                  [(ngModel)]="params.roleUsuario"
+                  [value]="'USER'"
+                  (change)="findLogsByCriterio()"
                 />
-                <label class="form-check-label" for="flexRadioDefault2">
+                <label class="form-check-label" for="radioRoleUser">
                   USUARIO
                 </label>
               </div>
