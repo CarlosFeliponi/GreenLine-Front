@@ -113,6 +113,25 @@
               </mat-form-field>
             </div>
 
+            <!-- Ordem -->
+            <div>
+              <!-- <mat-form-field>
+                <mat-label>Ordem</mat-label>
+                <mat-select>
+                  @for (orden of ordens; track orden) {
+                    <mat-option [value]="orden.value">{{orden.viewValue}}</mat-option>
+                  }
+                </mat-select>
+              </mat-form-field> -->
+              <mat-form-field subscriptSizing="dynamic">
+                <mat-label>Ordem</mat-label>
+                <mat-select [(value)]="ordem" (valueChange)="sortLog()">
+                  <mat-option [value]="true">Crescente</mat-option>
+                  <mat-option [value]="false">Decrescente</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
         </form>
 
         <br /><br /><br />
