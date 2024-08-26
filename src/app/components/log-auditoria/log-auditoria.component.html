@@ -1,4 +1,4 @@
-<br>
+<br />
 <div class="container">
   <div class="row">
     <div class="card">            
@@ -83,36 +83,43 @@
 
         </form>
 
-
-
+        <br /><br /><br />
 
         <table border="1" class="table table-striped">
           <thead>
             <tr>
-              <!-- <th (click)="sortById()">ID</th> -->
               <th>Data hora</th>
-              <!-- <th (click)="sortByAcao()">Ação</th> -->
+              <th>Role</th>
               <th>Email</th>
               <th>Operação</th>
               <th>Entidade</th>
+              <th>Produto</th>
               <th>Detalhes</th>
             </tr>
           </thead>
           <tbody>
-            @for (item of logSortido; track $index) {
+            @for (item of logAuditoria; track $index) {
             <tr>
-              <!-- <td>{{ item.idLog }}</td> -->
               <td>{{ item.timestamp }}</td>
+              <td>'ADMINtest-front'</td>
+              <!-- <td>{{ item.role }}</td> -->
               @if(item.emailUsuario){
-                <td>{{ item.emailUsuario }}</td>
+              <td>{{ item.emailUsuario }}</td>
               } @else {
-                <td>---</td> }
+              <td>---</td>
+              }
               <td>{{ item.acao }}</td>
               <td>{{ item.entity }}</td>
+              <td>"TV 32p. test-fron"</td>
+              <!-- @if(item.produto){
+              <td>{{ item.produto }}</td>
+              } @else {
+              <td>---</td> } -->
               @if(item.detalhes){
               <td>{{ item.detalhes }}</td>
               } @else {
-              <td>---</td> }
+              <td>---</td>
+              }
             </tr>
             }
           </tbody>
