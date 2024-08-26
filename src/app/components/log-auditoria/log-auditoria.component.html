@@ -85,17 +85,20 @@
                 <mat-date-range-picker #picker></mat-date-range-picker>
               </mat-form-field>
             </div>
-            <div class="form-check form-check-inline">
-              <input
-                mdbCheckbox
-                class="form-check-input"
-                type="radio"
-                id="CheckboxTodos"
-                value="option3"
-              />
-              <label class="form-check-label" for="CheckboxTodos">TODOS</label>
+
+            <!-- Operação -->
+            <div>
+              <mat-form-field subscriptSizing="dynamic">
+                <mat-label>Operação</mat-label>
+                <mat-select [(value)]="selected">
+                  <!-- <mat-option>Todas</mat-option> -->
+                  <mat-option value="option1">Cadastro</mat-option>
+                  <mat-option value="option2">Exclução</mat-option>
+                  <mat-option value="option3">Atualização</mat-option>
+                  <mat-option value="option4">Login e logout</mat-option>
+                </mat-select>
+              </mat-form-field>
             </div>
-          </div>
 
           <div>
             <ul class="navbar-nav flex-row">
