@@ -38,6 +38,11 @@ export class LogAuditoriaComponent {
   // startDate: Date | null = null;
   // endDate: Date | null = null;
 
+  logService = inject(LogAuditoriaService);
+  
+  logAuditoria: LogAuditoria[] =[];
+  ordem: boolean = true;
+  
   constructor(){
     this.listAll();
   }
@@ -46,10 +51,10 @@ export class LogAuditoriaComponent {
     this.logService.listAll().subscribe(
       {
         next: lista =>{
-          this.logCompleto = lista;
-          this.logSortido = lista;
+          this.logAuditoria = lista;
         },
         error: erro => {
+          console.log("Erro: ", erro);
           Swal.fire({
             title: 'Erro',
             icon: 'error',
@@ -59,46 +64,26 @@ export class LogAuditoriaComponent {
       }
     );
   }
-  sortById(){
-    this.ordem = !this.ordem;
+  sortLog(){
+    console.log(this.ordem);
     if(this.ordem){
-      this.logSortido.sort(function(a, b){
-        if(a.idLog < b.idLog)
+      this.logAuditoria.sort(function(a, b){
+        if(a.timestamp < b.timestamp)
           return -1;
-        if(a.idLog > b.idLog)
+        if(a.timestamp > b.timestamp)
           return 1;
         return 0;
       });
     }
     else{
-      this.logSortido.sort(function(a, b){
-        if(a.idLog > b.idLog)
+      this.logAuditoria.sort(function(a, b){
+        if(a.timestamp > b.timestamp)
           return -1;
-        if(a.idLog < b.idLog)
+        if(a.timestamp < b.timestamp)
           return 1;
         return 0;
       });
     }
-  }
-  sortByAcao(){
-    this.ordem = !this.ordem;
-    if(this.ordem){
-      this.logSortido.sort(function(a, b){
-        if(a.acao < b.acao)
-          return -1;
-        if(a.acao > b.acao)
-          return 1;
-        return 0;
-      });
-    }
-    else{
-      this.logSortido.sort(function(a, b){
-        if(a.acao > b.acao)
-          return -1;
-        if(a.acao < b.acao)
-          return 1;
-        return 0;
-      });
-    }
+    console.log('log', this.logAuditoria);
   }
 }
