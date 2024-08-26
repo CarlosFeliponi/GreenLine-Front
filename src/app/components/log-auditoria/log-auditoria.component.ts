@@ -38,38 +38,52 @@ interface Ordem {
   styleUrl: './log-auditoria.component.scss',
 })
 export class LogAuditoriaComponent {
+  // Definimos um objeto público chamado 'params' para armazenar parâmetros usados em buscas de logs.
   public params = {
+    // 'range' é um grupo de formulários que contém dois controles para datas (início e fim).
     range: new FormGroup({
+      // 'start' é o controle para a data de início do intervalo.
       start: new FormControl<Date | undefined>(undefined),
+      // 'end' é o controle para a data de fim do intervalo.
       end: new FormControl<Date | undefined>(undefined),
     }),
+    // 'acao', 'roleUsuario', 'logName', 'entity', e 'emailUsuario' são campos que armazenam critérios de busca.
     acao: undefined,
     roleUsuario: undefined,
     logName: undefined,
     entity: undefined,
     emailUsuario: undefined
   }
-  selected = 'option1';
 
-  // startDate: Date | null = null;
-  // endDate: Date | null = null;
-
+  // 'logService' é uma instância de LogAuditoriaService, injetada automaticamente.
   logService = inject(LogAuditoriaService);
 
+  // 'logAuditoria' é uma lista onde os logs buscados serão armazenados.
   logAuditoria: LogAuditoria[] = [];
+
+  // 'ordem' define a ordem de ordenação dos logs (crescente ou decrescente).
   ordem: boolean = true;
 
+  // O construtor é executado quando a classe é instanciada.
   constructor() {
+    // Chama o método 'listAll' ao criar a instância do componente.
     this.listAll();
   }
 
+  // 'listAll' busca todos os logs disponíveis no serviço.
   listAll() {
+    // Chama o método 'listAll' do serviço para buscar todos os logs.
     this.logService.listAll().subscribe({
+      // Se a requisição for bem-sucedida, 'next' é chamado com a lista de logs.
       next: (lista) => {
+        // Armazena os logs recebidos na variável 'logAuditoria'.
         this.logAuditoria = lista;
       },
+      // Se houver um erro na requisição, 'error' é chamado.
       error: (erro) => {
+        // Exibe o erro no console.
         console.log('Erro: ', erro);
+        // Exibe um alerta na tela informando o erro.
         Swal.fire({
           title: 'Erro',
           icon: 'error',
@@ -79,8 +93,11 @@ export class LogAuditoriaComponent {
     });
   }
 
+  // 'sortLog' organiza os logs em ordem crescente ou decrescente com base em 'timestamp'.
   sortLog() {
+    // Exibe a ordem atual no console (true para crescente, false para decrescente).
     console.log(this.ordem);
+    // Se 'ordem' for true, organiza em ordem crescente.
     if (this.ordem) {
       this.logAuditoria.sort(function (a, b) {
         if (a.timestamp < b.timestamp) return -1;
@@ -88,32 +105,44 @@ export class LogAuditoriaComponent {
         return 0;
       });
     } else {
+      // Caso contrário, organiza em ordem decrescente.
       this.logAuditoria.sort(function (a, b) {
         if (a.timestamp > b.timestamp) return -1;
         if (a.timestamp < b.timestamp) return 1;
         return 0;
       });
     }
+    // Exibe a lista de logs ordenada no console.
     console.log('log', this.logAuditoria);
   }
 
+  // 'findLogsByCriterio' busca logs com base nos critérios definidos em 'params'.
   findLogsByCriterio() {
+    // Chama o serviço para buscar logs com base nos critérios.
     this.logService
       .findLogsByCriterio(
-        this.params.range.get('start')?.value || undefined, // startDate
-        this.params.range.get('end')?.value || undefined, // endDate
-        this.params.acao, // acao
-        this.params.roleUsuario, // roleUsuario
-        this.params.logName, // logName
-        this.params.entity, //entity
-        this.params.emailUsuario // emailUsuario
+        // Passa a data de início (ou undefined se não for selecionada).
+        this.params.range.get('start')?.value || undefined,
+        // Passa a data de fim (ou undefined se não for selecionada).
+        this.params.range.get('end')?.value || undefined,
+        // Passa os outros parâmetros de busca.
+        this.params.acao,
+        this.params.roleUsuario,
+        this.params.logName,
+        this.params.entity,
+        this.params.emailUsuario
       )
       .subscribe({
+        // Se a requisição for bem-sucedida, 'next' é chamado com os logs encontrados.
         next: (data: LogAuditoria[]) => {
+          // Armazena os logs encontrados em 'logAuditoria'.
           this.logAuditoria = data;
+          // Exibe os logs buscados com sucesso no console.
           console.log('Logs fetched successfully:', this.logAuditoria);
         },
+        // Se houver um erro na requisição, 'error' é chamado.
         error: (error) => {
+          // Exibe o erro no console.
           console.error('Error fetching logs:', error);
         },
       });
