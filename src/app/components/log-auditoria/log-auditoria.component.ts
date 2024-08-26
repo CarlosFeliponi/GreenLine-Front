@@ -3,12 +3,13 @@ import { LogAuditoria } from '../../models/log-auditoria';
 import { LogAuditoriaService } from '../../services/log-auditoria.service';
 import Swal from 'sweetalert2';
 import { MdbAccordionModule } from 'mdb-angular-ui-kit/accordion';
+import { MdbDropdownModule } from 'mdb-angular-ui-kit/dropdown';
 
 
 @Component({
   selector: 'app-log-auditoria',
   standalone: true,
-  imports: [MdbAccordionModule],
+  imports: [MdbAccordionModule, MdbDropdownModule],
   templateUrl: './log-auditoria.component.html',
   styleUrl: './log-auditoria.component.scss'
 })
