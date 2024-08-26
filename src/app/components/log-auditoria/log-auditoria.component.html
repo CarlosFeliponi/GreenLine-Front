@@ -82,9 +82,9 @@
             <div>
               <mat-form-field subscriptSizing="dynamic">
                 <mat-label>Data</mat-label>
-                <mat-date-range-input [rangePicker]="picker">
-                  <input matStartDate placeholder="Data de inicio" />
-                  <input matEndDate placeholder="Data de termino" />
+                <mat-date-range-input [formGroup]="params.range" [rangePicker]="picker">
+                  <input matStartDate formControlName="start" placeholder="Data de inicio" />
+                  <input matEndDate formControlName="end" placeholder="Data de termino" />
                 </mat-date-range-input>
                 <!-- <mat-hint>DD/MM/YYYY – DD/MM/YYYY</mat-hint> -->
                 <mat-datepicker-toggle
@@ -114,7 +114,6 @@
               <mat-form-field subscriptSizing="dynamic">
                 <mat-label>Entidade</mat-label>
                 <mat-select [(value)]="params.entity" (valueChange)="findLogsByCriterio()">
-                  <!-- <mat-option>Todas</mat-option> -->
                   <mat-option [value]="'Produto'">Produto</mat-option>
                   <mat-option [value]="'Venda'">Venda</mat-option>
                   <mat-option [value]="'Usuario'">Usuario</mat-option>

@@ -10,7 +10,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
 // import para o input de ordem
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 
@@ -30,14 +30,17 @@ interface Ordem {
     MatSelectModule,
     MatInputModule,
     FormsModule,
+    ReactiveFormsModule
   ],
   templateUrl: './log-auditoria.component.html',
   styleUrl: './log-auditoria.component.scss',
 })
 export class LogAuditoriaComponent {
   public params = {
-    startDate: undefined,
-    endDate: undefined,
+    range: new FormGroup({
+      start: new FormControl<Date | undefined>(undefined),
+      end: new FormControl<Date | undefined>(undefined),
+    }),
     acao: undefined,
     roleUsuario: undefined,
     logName: undefined,
@@ -95,8 +98,8 @@ export class LogAuditoriaComponent {
   findLogsByCriterio() {
     this.logService
       .findLogsByCriterio(
-        this.params.startDate, // startDate
-        this.params.endDate, // endDate
+        this.params.range.get('start')?.value || undefined, // startDate
+        this.params.range.get('end')?.value || undefined, // endDate
         this.params.acao, // acao
         this.params.roleUsuario, // roleUsuario
         this.params.logName, // logName
