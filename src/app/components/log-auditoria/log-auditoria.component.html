@@ -40,7 +40,6 @@
                   [checked]="true"
                   [(ngModel)]="params.roleUsuario"
                   [value]="undefined"
-                  (change)="findLogsByCriterio()"
                 />
                 <label class="form-check-label" for="radioRoleTodos">
                   TODOS
@@ -55,7 +54,6 @@
                   id="radioRoleAdmin"
                   [(ngModel)]="params.roleUsuario"
                   [value]="'ADMIN'"
-                  (change)="findLogsByCriterio()"
                 />
                 <label class="form-check-label" for="radioRoleAdmin">
                   ADMIN
@@ -70,7 +68,6 @@
                   id="radioRoleUser"
                   [(ngModel)]="params.roleUsuario"
                   [value]="'USER'"
-                  (change)="findLogsByCriterio()"
                 />
                 <label class="form-check-label" for="radioRoleUser">
                   USUARIO
@@ -82,9 +79,20 @@
             <div>
               <mat-form-field subscriptSizing="dynamic">
                 <mat-label>Data</mat-label>
-                <mat-date-range-input [formGroup]="params.range" [rangePicker]="picker">
-                  <input matStartDate formControlName="start" placeholder="Data de inicio" />
-                  <input matEndDate formControlName="end" placeholder="Data de termino" />
+                <mat-date-range-input
+                  [formGroup]="params.range"
+                  [rangePicker]="picker"
+                >
+                  <input
+                    matStartDate
+                    formControlName="start"
+                    placeholder="Data de inicio"
+                  />
+                  <input
+                    matEndDate
+                    formControlName="end"
+                    placeholder="Data de termino"
+                  />
                 </mat-date-range-input>
                 <!-- <mat-hint>DD/MM/YYYY – DD/MM/YYYY</mat-hint> -->
                 <mat-datepicker-toggle
@@ -99,7 +107,9 @@
             <div>
               <mat-form-field subscriptSizing="dynamic">
                 <mat-label>Operação</mat-label>
-                <mat-select [(value)]="params.acao" (valueChange)="findLogsByCriterio()">
+                <mat-select
+                  [(value)]="params.acao"
+                >
                   <!-- <mat-option>Todas</mat-option> -->
                   <mat-option [value]="'SAVE'">Cadastro</mat-option>
                   <mat-option [value]="'DELETE'">Exclução</mat-option>
@@ -113,7 +123,9 @@
             <div>
               <mat-form-field subscriptSizing="dynamic">
                 <mat-label>Entidade</mat-label>
-                <mat-select [(value)]="params.entity" (valueChange)="findLogsByCriterio()">
+                <mat-select
+                  [(value)]="params.entity"
+                >
                   <mat-option [value]="'Produto'">Produto</mat-option>
                   <mat-option [value]="'Venda'">Venda</mat-option>
                   <mat-option [value]="'Usuario'">Usuario</mat-option>
@@ -133,13 +145,14 @@
               </mat-form-field> -->
               <mat-form-field subscriptSizing="dynamic">
                 <mat-label>Ordem</mat-label>
-                <mat-select [(value)]="ordem" (valueChange)="sortLog()">
+                <mat-select [(value)]="ordem">
                   <mat-option [value]="true">Crescente</mat-option>
                   <mat-option [value]="false">Decrescente</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
           </div>
+          <button mat-raised-button (click)="findLogsByCriterio()" (click)="sortLog()">Basic</button>
         </form>
 
         <br /><br /><br />
