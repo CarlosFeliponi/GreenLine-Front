@@ -95,8 +95,6 @@ export class LogAuditoriaComponent {
 
   // 'sortLog' organiza os logs em ordem crescente ou decrescente com base em 'timestamp'.
   sortLog() {
-    // Exibe a ordem atual no console (true para crescente, false para decrescente).
-    console.log(this.ordem);
     // Se 'ordem' for true, organiza em ordem crescente.
     if (this.ordem) {
       this.logAuditoria.sort(function (a, b) {
@@ -112,8 +110,6 @@ export class LogAuditoriaComponent {
         return 0;
       });
     }
-    // Exibe a lista de logs ordenada no console.
-    console.log('log', this.logAuditoria);
   }
 
   // 'findLogsByCriterio' busca logs com base nos critérios definidos em 'params'.
@@ -137,13 +133,11 @@ export class LogAuditoriaComponent {
         next: (data: LogAuditoria[]) => {
           // Armazena os logs encontrados em 'logAuditoria'.
           this.logAuditoria = data;
-          // Exibe os logs buscados com sucesso no console.
-          console.log('Logs fetched successfully:', this.logAuditoria);
         },
         // Se houver um erro na requisição, 'error' é chamado.
         error: (error) => {
           // Exibe o erro no console.
-          console.error('Error fetching logs:', error);
+          console.error('Erro:', error);
         },
       });
   }
