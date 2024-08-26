@@ -41,6 +41,7 @@ export class LogAuditoriaComponent {
     acao: undefined,
     roleUsuario: undefined,
     logName: undefined,
+    entity: undefined,
     emailUsuario: undefined
   }
   selected = 'option1';
@@ -99,13 +100,13 @@ export class LogAuditoriaComponent {
         this.params.acao, // acao
         this.params.roleUsuario, // roleUsuario
         this.params.logName, // logName
+        this.params.entity, //entity
         this.params.emailUsuario // emailUsuario
       )
       .subscribe({
         next: (data: LogAuditoria[]) => {
           this.logAuditoria = data;
           console.log('Logs fetched successfully:', this.logAuditoria);
-          console.log('role', this.params.roleUsuario)
         },
         error: (error) => {
           console.error('Error fetching logs:', error);

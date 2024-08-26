@@ -113,11 +113,11 @@
             <div>
               <mat-form-field subscriptSizing="dynamic">
                 <mat-label>Entidade</mat-label>
-                <mat-select [(value)]="selected">
+                <mat-select [(value)]="params.entity" (valueChange)="findLogsByCriterio()">
                   <!-- <mat-option>Todas</mat-option> -->
-                  <mat-option value="option1">Produto</mat-option>
-                  <mat-option value="option2">Venda</mat-option>
-                  <mat-option value="option3">Usuario</mat-option>
+                  <mat-option [value]="'Produto'">Produto</mat-option>
+                  <mat-option [value]="'Venda'">Venda</mat-option>
+                  <mat-option [value]="'Usuario'">Usuario</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>

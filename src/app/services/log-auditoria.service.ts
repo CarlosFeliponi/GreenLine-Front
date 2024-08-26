@@ -24,6 +24,7 @@ export class LogAuditoriaService {
     acao?: string,
     roleUsuario?: string,
     logName?: string,
+    entity?: string,
     emailUsuario?: string
   ): Observable<LogAuditoria[]> {
     let params = new HttpParams();
@@ -42,6 +43,9 @@ export class LogAuditoriaService {
     }
     if (logName) {
       params = params.set('logName', logName);
+    }
+    if (entity) {
+      params = params.set('entity', entity);
     }
     if (emailUsuario) {
       params = params.set('emailUsuario', emailUsuario);
