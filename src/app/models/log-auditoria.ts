@@ -6,4 +6,6 @@ export class LogAuditoria {
 	entity!: string;
 	idEntity!: number;
 	detalhes!: string;
+	logName!: string;
+	roleUsuario!: string;
 }
