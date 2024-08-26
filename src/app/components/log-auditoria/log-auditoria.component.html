@@ -12,13 +12,32 @@
           <!-- Search --><!-- revisar -->
           <div class="d-flex justify-content-center">
             <div class="input-group rounded w-50">
-              <input
-                type="search"
-                class="form-control rounded"
-                placeholder="Produto    |   Email"
-                aria-label="Search"
-                aria-describedby="search-addon"
-              />
+              <fieldset>
+                <label for="filterProduto">Buscar por produto</label>
+                <input
+                  type="search"
+                  class="form-control rounded"
+                  placeholder="Produto"
+                  aria-label="Search"
+                  aria-describedby="search-addon"
+                  name="filterProduto"
+                  id="filterProduto"
+                  [(ngModel)]="params.logName"
+                />
+              </fieldset>
+              <fieldset>
+                <label for="filterEmail">Buscar por e-mail</label>
+                <input
+                  type="email"
+                  class="form-control rounded"
+                  placeholder="Email"
+                  aria-label="Email"
+                  aria-describedby="email-addon"
+                  name="filterEmail"
+                  id="filterEmail"
+                  [(ngModel)]="params.emailUsuario"
+                />
+              </fieldset>
               <span class="input-group-text border-0" id="search-addon">
                 <i class="fas fa-search"></i>
               </span>
@@ -107,9 +126,7 @@
             <div>
               <mat-form-field subscriptSizing="dynamic">
                 <mat-label>Operação</mat-label>
-                <mat-select
-                  [(value)]="params.acao"
-                >
+                <mat-select [(value)]="params.acao">
                   <!-- <mat-option>Todas</mat-option> -->
                   <mat-option [value]="'SAVE'">Cadastro</mat-option>
                   <mat-option [value]="'DELETE'">Exclução</mat-option>
@@ -123,9 +140,7 @@
             <div>
               <mat-form-field subscriptSizing="dynamic">
                 <mat-label>Entidade</mat-label>
-                <mat-select
-                  [(value)]="params.entity"
-                >
+                <mat-select [(value)]="params.entity">
                   <mat-option [value]="'Produto'">Produto</mat-option>
                   <mat-option [value]="'Venda'">Venda</mat-option>
                   <mat-option [value]="'Usuario'">Usuario</mat-option>
@@ -152,7 +167,13 @@
               </mat-form-field>
             </div>
           </div>
-          <button mat-raised-button (click)="findLogsByCriterio()" (click)="sortLog()">Basic</button>
+          <button
+            mat-raised-button
+            (click)="findLogsByCriterio()"
+            (click)="sortLog()"
+          >
+            Basic
+          </button>
         </form>
 
         <br /><br /><br />
