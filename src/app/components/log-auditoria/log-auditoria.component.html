@@ -68,15 +68,22 @@
                 </label>
               </div>
             </div>
-            <div class="form-check form-check-inline">
-              <input
-                mdbCheckbox
-                class="form-check-input"
-                type="radio"
-                id="CheckboxUsuario"
-                value="option2"
-              />
-              <label class="form-check-label" for="CheckboxUsuario">USUARIO</label>
+
+            <!-- Calendario -->
+            <div>
+              <mat-form-field subscriptSizing="dynamic">
+                <mat-label>Data</mat-label>
+                <mat-date-range-input [rangePicker]="picker">
+                  <input matStartDate placeholder="Data de inicio" />
+                  <input matEndDate placeholder="Data de termino" />
+                </mat-date-range-input>
+                <!-- <mat-hint>DD/MM/YYYY – DD/MM/YYYY</mat-hint> -->
+                <mat-datepicker-toggle
+                  matIconSuffix
+                  [for]="picker"
+                ></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+              </mat-form-field>
             </div>
             <div class="form-check form-check-inline">
               <input
