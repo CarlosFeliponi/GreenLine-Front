@@ -100,36 +100,18 @@
               </mat-form-field>
             </div>
 
-          <div>
-            <ul class="navbar-nav flex-row">
-              <li mdbDropdown class="nav-item dropdown me-3 me-lg-1">
-                <a
-                  class="nav-link dropdown-toggle hidden-arrow"
-                  id="navbarDropdownMenuLink"
-                  role="button"
-                  mdbDropdownToggle
-                  aria-expanded="false"
-                >
-                  <i class="fas fa-chevron-circle-down fa-lg"></i>
-                </a>
-                <ul
-                  mdbDropdownMenu
-                  class="dropdown-menu dropdown-menu-end"
-                  aria-labelledby="navbarDropdownMenuLink"
-                >
-                  <li>
-                    <a class="dropdown-item" href="#">Some news</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#">Another news</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
+            <!-- Entidade -->
+            <div>
+              <mat-form-field subscriptSizing="dynamic">
+                <mat-label>Entidade</mat-label>
+                <mat-select [(value)]="selected">
+                  <!-- <mat-option>Todas</mat-option> -->
+                  <mat-option value="option1">Produto</mat-option>
+                  <mat-option value="option2">Venda</mat-option>
+                  <mat-option value="option3">Usuario</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
 
         </form>
 
