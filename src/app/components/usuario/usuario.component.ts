@@ -42,7 +42,6 @@ export class UsuarioComponent {
         .findByUsuarioId(this.loginService.getUsuarioLogado().idUsuario)
         .subscribe({
           next: (cliente) => {
-            console.log(cliente);
             if (cliente == null) {
               this.findByLoginId();
             } else {
@@ -65,7 +64,6 @@ export class UsuarioComponent {
         .findByLoginId(this.loginService.getUsuarioLogado().idUsuario)
         .subscribe({
           next: (usuario) => {
-            console.log(usuario);
             this.usuario = usuario;
           },
           error: (erro) => {
@@ -81,7 +79,6 @@ export class UsuarioComponent {
     } else {
       this.cliente.usuario = this.usuario;
 
-      console.log(this.cliente);
 
       if (this.cliente.idCliente > 0) {
         this.usuarioService.update(this.cliente, this.cliente.idCliente).subscribe({

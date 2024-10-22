@@ -24,7 +24,6 @@ export class LoginComponent {
   logar() {
     this.loginService.login(this.loginData).subscribe({
       next: token => {
-        console.log(token);
         Swal.fire({
           title: 'Bem vindo',
           icon: 'success',

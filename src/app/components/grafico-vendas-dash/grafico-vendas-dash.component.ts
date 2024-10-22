@@ -25,7 +25,6 @@ export class GraficoVendasDashComponent implements OnInit{
     this.carrinhoService.ListVendasByMonthForLast12Months().subscribe({
       next: lista => {
         this.lista = lista;
-        console.log('Lista fetched:', this.lista);
         this.chartdata();
       },
       error: erro => {
@@ -48,10 +47,8 @@ export class GraficoVendasDashComponent implements OnInit{
         this.dataVenda.push(o.mes);
       })
        // Debugging: log valorVenda
-      console.log('ValorVenda:', this.valorVenda);
       this.renderChart(this.valorVenda, this.dataVenda);
     }else {
-      console.log('Lista is empty, skipping chart rendering');
     }
   }
 

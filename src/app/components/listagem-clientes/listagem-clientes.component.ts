@@ -22,7 +22,6 @@ export class ListagemClientesComponent {
     this.clienteService.listAll().subscribe({
       next: lista => {
         this.lista = lista;
-        console.log(lista);
       },
       error: erro => {
         Swal.fire({

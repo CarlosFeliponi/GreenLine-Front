@@ -20,7 +20,6 @@ export class LoginService {
 
 
   login(loginData: Autenticador): Observable<string> {
-    console.log('Dados de login:', loginData);
     return this.http.post<string>(this.API+"/login", loginData, {responseType: 'text' as 'json'}); // Envie o objeto Login completo no corpo da solicitação
   }
 

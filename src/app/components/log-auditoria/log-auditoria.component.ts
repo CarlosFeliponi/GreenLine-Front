@@ -82,7 +82,6 @@ export class LogAuditoriaComponent {
       // Se houver um erro na requisição, 'error' é chamado.
       error: (erro) => {
         // Exibe o erro no console.
-        console.log('Erro: ', erro);
         // Exibe um alerta na tela informando o erro.
         Swal.fire({
           title: 'Erro',
@@ -97,7 +96,6 @@ export class LogAuditoriaComponent {
   sortLog() {
     // Se 'ordem' for true, organiza em ordem crescente.
     if (this.ordem) {
-      console.log('ordem', this.ordem )
       this.logAuditoria.sort(function (a, b) {
         if (a.timestamp < b.timestamp) return -1;
         if (a.timestamp > b.timestamp) return 1;
@@ -111,7 +109,6 @@ export class LogAuditoriaComponent {
         return 0;
       });
     }
-    console.log( this.logAuditoria )
   }
 
   // 'findLogsByCriterio' busca logs com base nos critérios definidos em 'params'.
